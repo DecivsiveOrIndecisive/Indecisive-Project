@@ -30,7 +30,7 @@ function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Learn Chakra
+              Learn Chakra test for first commit
             </Link>
           </VStack>
         </Grid>
