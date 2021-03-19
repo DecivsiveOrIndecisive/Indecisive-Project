@@ -25,12 +25,12 @@ function App() {
             </Text>
             <Link
               color="teal.500"
-              href="https://chakra-ui.com"
+              href="https://fgc-share.vercel.app/"
               fontSize="2xl"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Learn Chakra
+              Drew is the best!
             </Link>
           </VStack>
         </Grid>
