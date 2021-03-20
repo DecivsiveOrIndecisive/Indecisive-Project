@@ -10,12 +10,13 @@ import {
   theme,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './components/ColorModeSwitcher';
-import { Logo } from './Logo';
+// import { Logo } from './Logo';
+import Map from './components/Map/Map'
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
+      {/* <Box textAlign="center" fontSize="xl">
         <Grid minH="100vh" p={3}>
           <ColorModeSwitcher justifySelf="flex-end" />
           <VStack spacing={8}>
@@ -25,7 +26,7 @@ function App() {
             </Text>
             <Link
               color="teal.500"
-              href="https://chakra-ui.com"
+              href="https://fgc-share.vercel.app/"
               fontSize="2xl"
               target="_blank"
               rel="noopener noreferrer"
@@ -34,7 +35,9 @@ function App() {
             </Link>
           </VStack>
         </Grid>
-      </Box>
+      </Box> */}
+
+        <Map />
     </ChakraProvider>
   );
 }
