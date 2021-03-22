@@ -1,11 +1,11 @@
-import { Flex, Spacer, Box } from "@chakra-ui/react"
-import { Icon } from "@chakra-ui/react"
-import { ColorModeSwitcher } from './ColorModeSwitcher'
-import { Logo } from '../Logo';
-import { useHistory } from 'react-router-dom'
+import { Flex, Spacer, Box } from "@chakra-ui/react";
+import { Icon } from "@chakra-ui/react";
+import { ColorModeSwitcher } from "./ColorModeSwitcher";
+import { Logo } from "../Logo";
+import { useHistory } from "react-router-dom";
 
 const Nav = () => {
-    let history = useHistory()
+  let history = useHistory();
 
     const handleClick = () => {
         history.push('/login')
