@@ -10,10 +10,15 @@ const Nav = () => {
     const handleClick = () => {
         history.push('/login')
     }
+
+    const homeClick = () => {
+        history.push('/')
+    }
+    
     return (
         <header>
             <Flex>
-                <Logo m={2} height={'30px'} />
+                <Logo m={2} height={'30px'} onClick={homeClick}/>
                 <Spacer />
                 <Box display="block" onClick={handleClick}>
                     <Icon m={5} viewBox="0 0 30 30" color="red.500">

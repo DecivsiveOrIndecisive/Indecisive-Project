@@ -20,13 +20,14 @@ import {
     Code,
     Grid,
     theme,
-    Flex
+    Flex,
+    Container
   } from '@chakra-ui/react';
 
 const libraries = ['places']
 const mapContainerStyle = {
-    width: '100vw',
-    height: '100vh'
+    width: '40vw',
+    height: '35vh'
 }
 
 const options = {
@@ -70,7 +71,7 @@ function Map() {
 
     return(
         <Flex>
-            <GoogleMap
+                <GoogleMap
                     mapContainerStyle={mapContainerStyle}
                     zoom={14}
                     center={center}
@@ -85,7 +86,6 @@ function Map() {
                     /> */}
 
                 </GoogleMap>
-
         </Flex>
     )
 }
