@@ -8,7 +8,6 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from '../Logo';
 
 const Login = () => {
@@ -32,7 +31,6 @@ const Login = () => {
           borderRadius={4}
           //   boxShadow="dark-lg"
         >
-          <ColorModeSwitcher />
           <Box>
             <Box textAlign="center">
               <Heading>Log In</Heading>
