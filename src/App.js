@@ -1,12 +1,13 @@
 import React from "react";
 import { ChakraProvider, theme } from "@chakra-ui/react";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Nav from "./components/Nav";
+import routes from "./routes";
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Register />
+      <Nav />
+      {routes}
     </ChakraProvider>
   );
 }

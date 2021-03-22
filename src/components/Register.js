@@ -4,21 +4,27 @@ import {
   Link,
   FormControl,
   Input,
+  InputGroup,
+  InputRightElement,
   Button,
   Flex,
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { Logo } from "../Logo";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { Link as ReactLink } from "react-router-dom";
 
 const Register = () => {
+  let history = useHistory();
   const [state, setState] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
+    show: false,
   });
+  const handleClick = () => setState({ ...state, show: !state.show });
 
   const handleChange = e => {
     const value = e.target.value;
@@ -30,7 +36,7 @@ const Register = () => {
 
   return (
     <>
-      <ArrowBackIcon colorScheme="red" w={8} h={8} />
+      <ArrowBackIcon colorScheme="red" w={8} h={8} onClick={history.goBack} />
       <Flex align="center" justify="center">
         <Flex
           direction={["column", "column", "column", "column"]}
@@ -49,7 +55,7 @@ const Register = () => {
             borderRadius={4}
             //   boxShadow="dark-lg"
           >
-            <ColorModeSwitcher />
+            {/* <ColorModeSwitcher /> */}
             <Box>
               <Box textAlign="center">
                 <Heading>Register</Heading>
@@ -81,20 +87,36 @@ const Register = () => {
                     />
                   </FormControl>
                   <FormControl my={5}>
-                    <Input
-                      textAlign="center"
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      focusBorderColor="red.400"
-                      borderRadius="100px"
-                      value={state.password}
-                      onChange={handleChange}
-                      errorBorderColor="crimson"
-                      isInvalid={
-                        state.password === state.confirmPassword ? false : true
-                      }
-                    />
+                    <InputGroup>
+                      <Input
+                        textAlign="center"
+                        type={state.show ? "text" : "password"}
+                        name="password"
+                        placeholder="Password"
+                        focusBorderColor="red.400"
+                        borderRadius="100px"
+                        value={state.password}
+                        onChange={handleChange}
+                        errorBorderColor="crimson"
+                        isInvalid={
+                          state.password === state.confirmPassword
+                            ? false
+                            : true
+                        }
+                      />
+                      <InputRightElement>
+                        <Button
+                          h="1.75rem"
+                          size="sm"
+                          mr={4}
+                          colorScheme="red"
+                          variant="ghost"
+                          onClick={handleClick}
+                        >
+                          {state.show ? "Hide" : "Show"}
+                        </Button>
+                      </InputRightElement>
+                    </InputGroup>
                   </FormControl>
                   <FormControl my={5}>
                     <Input
@@ -114,7 +136,9 @@ const Register = () => {
                   </FormControl>
 
                   <Box textAlign="center" m={2}>
-                    <Link>Already have an account? Sign in</Link>
+                    <Link as={ReactLink} to={"/login"}>
+                      Already have an account? Sign in
+                    </Link>
                   </Box>
                   <Button width="full" mt={4} colorScheme="red">
                     Register
