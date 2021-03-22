@@ -8,6 +8,7 @@ import {
   InputRightElement,
   Button,
   Flex,
+  useColorMode,
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Logo } from "../Logo";
@@ -31,6 +32,7 @@ const Login = () => {
       [e.target.name]: value,
     });
   };
+  console.log(useColorMode);
 
   return (
     <>

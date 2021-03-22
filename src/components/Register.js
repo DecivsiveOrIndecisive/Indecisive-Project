@@ -119,20 +119,36 @@ const Register = () => {
                     </InputGroup>
                   </FormControl>
                   <FormControl my={5}>
-                    <Input
-                      textAlign="center"
-                      type="password"
-                      name="confirmPassword"
-                      placeholder="Confirm Password"
-                      focusBorderColor="red.400"
-                      borderRadius="100px"
-                      value={state.confirmPassword}
-                      onChange={handleChange}
-                      errorBorderColor="crimson"
-                      isInvalid={
-                        state.password === state.confirmPassword ? false : true
-                      }
-                    />
+                    <InputGroup>
+                      <Input
+                        textAlign="center"
+                        type={state.show ? "text" : "password"}
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        focusBorderColor="red.400"
+                        borderRadius="100px"
+                        value={state.confirmPassword}
+                        onChange={handleChange}
+                        errorBorderColor="crimson"
+                        isInvalid={
+                          state.password === state.confirmPassword
+                            ? false
+                            : true
+                        }
+                      />
+                      <InputRightElement>
+                        <Button
+                          h="1.75rem"
+                          size="sm"
+                          mr={4}
+                          colorScheme="red"
+                          variant="ghost"
+                          onClick={handleClick}
+                        >
+                          {state.show ? "Hide" : "Show"}
+                        </Button>
+                      </InputRightElement>
+                    </InputGroup>
                   </FormControl>
 
                   <Box textAlign="center" m={2}>

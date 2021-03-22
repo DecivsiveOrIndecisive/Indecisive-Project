@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express"),
   massive = require("massive"),
-  session = require("express-session");
+  session = require("express-session"),
+  userCtrl = require("./controllers/user");
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
@@ -28,3 +29,5 @@ massive({
     console.log("db connected");
   })
   .catch(err => console.log(err));
+
+app.post("/api/auth/register", userCtrl.register);
