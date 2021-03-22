@@ -48,11 +48,38 @@ export default [
         ]
     },
     {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#e24c79"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#e77070"
+            }
+        ]
+    },
+    {
         "featureType": "road.arterial",
         "elementType": "labels.icon",
         "stylers": [
             {
                 "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#7e0303"
             }
         ]
     },
@@ -70,7 +97,7 @@ export default [
         "elementType": "all",
         "stylers": [
             {
-                "color": "#910000"
+                "color": "#b82837"
             },
             {
                 "visibility": "on"

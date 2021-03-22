@@ -9,9 +9,8 @@ import usePlacesAutocomplete, {
     getGeocode,
     getLatLng
 } from 'use-places-autocomplete'
-import mapStyles from './mapStyles'
-import mapStylesTwo from './mapStylesTwo'
-import mapStylesThree from './mapStylesThree'
+import mapStyleLight from './mapStyleLight'
+import mapStyleDark from './mapStyleDark'
 import {
     ChakraProvider,
     Box,
@@ -31,7 +30,7 @@ const mapContainerStyle = {
 }
 
 const options = {
-    styles: mapStylesThree,
+    styles: mapStyleDark,
 }
 
 
@@ -57,7 +56,7 @@ function Map() {
     
     
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: 'need to set up key',
+        googleMapsApiKey: 'needs key',
         libraries,
     })
 
@@ -73,7 +72,7 @@ function Map() {
         <Flex>
             <GoogleMap
                     mapContainerStyle={mapContainerStyle}
-                    zoom={15}
+                    zoom={14}
                     center={center}
                     options={options}
                     // onClick={onMapClick}
