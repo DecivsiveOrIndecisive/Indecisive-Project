@@ -15,11 +15,13 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Link as ReactLink } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   let history = useHistory();
   const [state, setState] = useState({
+    name: "",
     email: "",
     password: "",
+    confirmPassword: "",
     show: false,
   });
   const handleClick = () => setState({ ...state, show: !state.show });
@@ -56,10 +58,22 @@ const Login = () => {
             {/* <ColorModeSwitcher /> */}
             <Box>
               <Box textAlign="center">
-                <Heading>Log In</Heading>
+                <Heading>Register</Heading>
               </Box>
               <Box>
                 <form>
+                  <FormControl my={5}>
+                    <Input
+                      textAlign="center"
+                      type="name"
+                      name="name"
+                      placeholder="Name"
+                      focusBorderColor="red.400"
+                      borderRadius="100px"
+                      value={state.name}
+                      onChange={handleChange}
+                    />
+                  </FormControl>
                   <FormControl my={5}>
                     <Input
                       type="email"
@@ -83,6 +97,12 @@ const Login = () => {
                         borderRadius="100px"
                         value={state.password}
                         onChange={handleChange}
+                        errorBorderColor="crimson"
+                        isInvalid={
+                          state.password === state.confirmPassword
+                            ? false
+                            : true
+                        }
                       />
                       <InputRightElement>
                         <Button
@@ -98,13 +118,30 @@ const Login = () => {
                       </InputRightElement>
                     </InputGroup>
                   </FormControl>
+                  <FormControl my={5}>
+                    <Input
+                      textAlign="center"
+                      type="password"
+                      name="confirmPassword"
+                      placeholder="Confirm Password"
+                      focusBorderColor="red.400"
+                      borderRadius="100px"
+                      value={state.confirmPassword}
+                      onChange={handleChange}
+                      errorBorderColor="crimson"
+                      isInvalid={
+                        state.password === state.confirmPassword ? false : true
+                      }
+                    />
+                  </FormControl>
+
                   <Box textAlign="center" m={2}>
-                    <Link as={ReactLink} to={"/register"}>
-                      Don't have an account? Sign up
+                    <Link as={ReactLink} to={"/login"}>
+                      Already have an account? Sign in
                     </Link>
                   </Box>
                   <Button width="full" mt={4} colorScheme="red">
-                    Log In
+                    Register
                   </Button>
                 </form>
               </Box>
@@ -116,4 +153,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
