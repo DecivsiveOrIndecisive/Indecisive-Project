@@ -4,8 +4,8 @@ import Map from './Map/Map'
 const Homepage = () => {
     return (
         <section>
-            <Flex justify='space-between'>
-                <Heading as="h1" size="4xl" fontSize='250px' m={5}>Can't Decide?</Heading>
+            <Flex justify='space-between' direction={['column', 'column', 'row', 'row']}>
+                <Heading as="h1" fontSize={[50, 100, 180, 250]} m={5}>Can't Decide?</Heading>
                 <Container mr='200px'>
                     <Container centerContent>
                         <Heading as='h3' size='lg'>Enter Your Location</Heading>
