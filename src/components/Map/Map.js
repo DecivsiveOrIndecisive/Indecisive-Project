@@ -39,6 +39,7 @@ function Map() {
         lat: 40,
         lng: -111
     })
+    const [restaurants, setRestaurants] = useState([])
     useEffect(() => {
         fetchLocation()
     }, [])
