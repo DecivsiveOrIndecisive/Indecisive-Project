@@ -56,7 +56,7 @@ function Map() {
     
     
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: 'needs key',
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
     })
 
@@ -89,14 +89,5 @@ function Map() {
         </Flex>
     )
 }
-
-// const fetchLocation = () => {
-//     navigator.geolocation.getCurrentPosition((position) => {
-//         setCenter({
-//             lat: position.coords.latitude,
-//             lng: position.coords.longitude
-//         })
-//     }, _ => null)
-// }
 
 export default Map

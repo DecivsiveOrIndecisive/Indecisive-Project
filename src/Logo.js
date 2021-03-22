@@ -19,7 +19,7 @@ export const Logo = props => {
 
   return (
     <Image
-      animation={animation}
+      // animation={animation}
       src={colorMode === 'dark' ? light : dark}
       {...props}
     />
