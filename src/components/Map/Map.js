@@ -12,16 +12,16 @@ import usePlacesAutocomplete, {
 import mapStyleLight from './mapStyleLight'
 import mapStyleDark from './mapStyleDark'
 import {
-    ChakraProvider,
-    Box,
-    Text,
-    Link,
-    VStack,
-    Code,
-    Grid,
-    theme,
+    // ChakraProvider,
+    // Box,
+    // Text,
+    // Link,
+    // VStack,
+    // Code,
+    // Grid,
+    // theme,
+    // Container,
     Flex,
-    Container
   } from '@chakra-ui/react';
 import axios from 'axios'
 const libraries = ['places']
@@ -41,9 +41,10 @@ function Map() {
         lng: -111
     })
     const [restaurants, setRestaurants] = useState([])
+    console.log(restaurants)
     useEffect(() => {
         fetchLocation()
-        getRestaurants()
+        // getRestaurants()
     }, [])
 
     const fetchLocation = () => {
@@ -57,7 +58,8 @@ function Map() {
     }
 
     const getRestaurants = async () => {
-        const res = await axios.get('/api/restaurants')
+        console.log(center.lat)
+        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}`)
         setRestaurants(res.data)
     }
     
@@ -90,14 +92,14 @@ function Map() {
                     {restaurants.map((food, i) => (
                         <Marker
                             key={i}
-                            position={{lat: food.geometry.location.lat}, {lng: food.geometry.location.lng}}
+                            position={{lat: food.geometry.location.lat, lng: food.geometry.location.lng}}
                         />
                     ))}
-                    {/* <Marker
-                        position={{ lat: center.lat, lng: center.lng }}
-                    /> */}
+                   
 
                 </GoogleMap>
+                <button onClick={() => getRestaurants()}>test</button>
+                
         </Flex>
     )
 }

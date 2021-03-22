@@ -36,6 +36,3 @@ app.get('/api/restaurants', restaurantCtrl.getRestaurants)
 
 
 
-// app.listen(SERVER_PORT, () => {
-//   console.log(`Server is running on ${SERVER_PORT}`)
-// })
