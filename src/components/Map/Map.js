@@ -22,7 +22,7 @@ import {
     theme,
     Flex
   } from '@chakra-ui/react';
-
+import axios from 'axios'
 const libraries = ['places']
 const mapContainerStyle = {
     width: '100vw',
@@ -42,6 +42,7 @@ function Map() {
     const [restaurants, setRestaurants] = useState([])
     useEffect(() => {
         fetchLocation()
+        getRestaurants()
     }, [])
 
     const fetchLocation = () => {
@@ -54,6 +55,10 @@ function Map() {
         
     }
 
+    const getRestaurants = async () => {
+        const res = await axios.get('/api/restaurants')
+        setRestaurants(res.data)
+    }
     
     
     const { isLoaded, loadError } = useLoadScript({
@@ -81,6 +86,12 @@ function Map() {
 
                 >
 
+                    {restaurants.map((food, i) => (
+                        <Marker
+                            key={i}
+                            position={{lat: food.geometry.location.lat}, {lng: food.geometry.location.lng}}
+                        />
+                    ))}
                     {/* <Marker
                         position={{ lat: center.lat, lng: center.lng }}
                     /> */}

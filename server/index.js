@@ -3,6 +3,8 @@ const express = require("express"),
   massive = require("massive"),
   session = require("express-session");
 
+const restaurantCtrl = require('./controllers/resController')
+
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
 const app = express();
@@ -28,3 +30,12 @@ massive({
     console.log("db connected");
   })
   .catch(err => console.log(err));
+
+  //Restautant Endpoint!!!///////////
+app.get('/api/restaurants', restaurantCtrl.getRestaurants)
+
+
+
+app.listen(SERVER_PORT, () => {
+  console.log(`Server is running on ${SERVER_PORT}`)
+})
