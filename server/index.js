@@ -31,3 +31,5 @@ massive({
   .catch(err => console.log(err));
 
 app.post("/api/auth/register", userCtrl.register);
+app.post("/api/auth/login", userCtrl.login);
+app.post("/api/auth/logout", userCtrl.logout);
