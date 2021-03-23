@@ -33,3 +33,4 @@ massive({
 app.post("/api/auth/register", userCtrl.register);
 app.post("/api/auth/login", userCtrl.login);
 app.post("/api/auth/logout", userCtrl.logout);
+app.get("/api/auth/user", userCtrl.getUser);

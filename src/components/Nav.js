@@ -15,6 +15,7 @@ import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 const Nav = () => {
   const userContext = useContext(UserContext);
+  console.log(userContext);
   return (
     <header>
       <Flex align="center">
