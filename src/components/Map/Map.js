@@ -15,8 +15,8 @@ import { Flex } from "@chakra-ui/react";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  width: "40vw",
-  height: "35vh",
+  width: "100vw",
+  height: "40vh",
 };
 
 const options = {
