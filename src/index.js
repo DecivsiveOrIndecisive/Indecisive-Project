@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import {HashRouter, BrowserRouter} from 'react-router-dom'
 import { UserProvider } from './context/userContext';
+import { MapContext } from './context/mapContext';
 
 const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter
 
@@ -13,8 +14,10 @@ ReactDOM.render(
   <StrictMode>
       <Router>
           <UserProvider>
-              <ColorModeScript />
-              <App />
+              <MapContext>
+                <ColorModeScript />
+                <App />
+              </MapContext>
           </UserProvider>
       </Router>
   </StrictMode>,
