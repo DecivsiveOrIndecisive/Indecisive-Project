@@ -33,7 +33,7 @@ const Homepage = () => {
 
        
     
-      const mapRestaurants = restaurants.map((food, i) => {
+      const mapRestaurants = restaurants.map((food) => {
         return (
           <div key={food.references}>
             <p>{food.name}</p>
