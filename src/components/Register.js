@@ -163,7 +163,11 @@ const Register = () => {
                     mt={4}
                     colorScheme="red"
                     onClick={() =>
-                      userContext.register(state.name, state.password)
+                      userContext.register(
+                        state.name,
+                        state.email,
+                        state.password
+                      )
                     }
                   >
                     Register

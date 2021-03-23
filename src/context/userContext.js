@@ -41,7 +41,7 @@ export const UserProvider = withRouter(props => {
   };
   const login = async (email, password) => {
     try {
-      const response = await axios.post("", { email, password });
+      const response = await axios.post("/api/auth/login", { email, password });
       setUser(response.data);
       history.push("/");
     } catch {
@@ -49,9 +49,9 @@ export const UserProvider = withRouter(props => {
     }
   };
   const logout = async () => {
-    await axios.post("");
+    await axios.post("/api/auth/logout");
     setUser(null);
-    history.push("/");
+    history.push("/login");
   };
   return (
     <UserContext.Provider value={{ user, setUser, register, login, logout }}>

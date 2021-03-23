@@ -12,11 +12,13 @@ import {
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Logo } from "../Logo";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Link as ReactLink } from "react-router-dom";
+import { UserContext } from "../context/userContext";
 
 const Login = () => {
+  const userContext = useContext(UserContext);
   let history = useHistory();
   const [state, setState] = useState({
     email: "",
@@ -32,7 +34,6 @@ const Login = () => {
       [e.target.name]: value,
     });
   };
-  console.log(useColorMode);
 
   return (
     <>
@@ -105,7 +106,14 @@ const Login = () => {
                       Don't have an account? Sign up
                     </Link>
                   </Box>
-                  <Button width="full" mt={4} colorScheme="red">
+                  <Button
+                    width="full"
+                    mt={4}
+                    colorScheme="red"
+                    onClick={() =>
+                      userContext.login(state.email, state.password)
+                    }
+                  >
                     Log In
                   </Button>
                 </form>
