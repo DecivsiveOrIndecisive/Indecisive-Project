@@ -7,7 +7,6 @@ import * as serviceWorker from "./serviceWorker";
 import { HashRouter, BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./context/userContext";
 import { MapProvider } from "./context/mapContext";
-import { ChakraProvider, theme } from "@chakra-ui/react";
 
 const Router =
   process.env.NODE_ENV === "development" ? HashRouter : BrowserRouter;

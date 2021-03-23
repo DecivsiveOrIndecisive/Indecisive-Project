@@ -8,14 +8,18 @@ import {
   SliderFilledTrack,
   Button,
   Input,
+  useColorMode,
 } from "@chakra-ui/react";
-import Map from "./Map/Map";
-import { useContext } from "react";
-import { UserContext } from "../context/userContext";
+import MapDark from "./Map/Map";
+import MapLight from "./Map/MapLight";
 
 const Homepage = () => {
-  const userContext = useContext(UserContext);
-  console.log(userContext);
+  const { colorMode } = useColorMode();
+  if (colorMode === "dark") {
+    console.log("dark!!");
+  } else {
+    console.log("light!!");
+  }
   return (
     <section>
       <Flex
@@ -45,15 +49,17 @@ const Homepage = () => {
               Range
             </Heading>
           </Container>
-          <Slider aria-label="slider-ex-1" defaultValue={30}>
+          <Slider aria-label="slider-ex-1" defaultValue={30} colorScheme="red">
             <SliderTrack>
               <SliderFilledTrack />
             </SliderTrack>
             <SliderThumb />
           </Slider>
-          <Map />
+          {colorMode === "dark" ? <MapDark /> : <MapLight />}
           <Container centerContent m={3}>
-            <Button size="lg">Go</Button>
+            <Button size="lg" colorScheme="red">
+              Go
+            </Button>
           </Container>
         </Container>
       </Flex>
