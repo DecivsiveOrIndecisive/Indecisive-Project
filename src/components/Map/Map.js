@@ -40,28 +40,28 @@ function Map() {
         lat: 40,
         lng: -111
     })
-    const [restaurants, setRestaurants] = useState([])
-    console.log(restaurants)
-    useEffect(() => {
-        fetchLocation()
-        // getRestaurants()
-    }, [])
+    // const [restaurants, setRestaurants] = useState([])
+    // console.log(restaurants)
+    // useEffect(() => {
+    //     fetchLocation()
+    //     // getRestaurants()
+    // }, [])
 
-    const fetchLocation = () => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setCenter({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            })
-        }, _ => null)
+    // const fetchLocation = () => {
+    //     navigator.geolocation.getCurrentPosition((position) => {
+    //         setCenter({
+    //             lat: position.coords.latitude,
+    //             lng: position.coords.longitude
+    //         })
+    //     }, _ => null)
         
-    }
+    // }
 
-    const getRestaurants = async () => {
-        console.log(center.lat)
-        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}`)
-        setRestaurants(res.data)
-    }
+    // const getRestaurants = async () => {
+    //     console.log(center.lat)
+    //     const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}`)
+    //     setRestaurants(res.data)
+    // }
     
     
     const { isLoaded, loadError } = useLoadScript({
@@ -89,16 +89,16 @@ function Map() {
 
                 >
 
-                    {restaurants.map((food, i) => (
+                    {/* {restaurants.map((food, i) => (
                         <Marker
                             key={i}
                             position={{lat: food.geometry.location.lat, lng: food.geometry.location.lng}}
                         />
-                    ))}
+                    ))} */}
                    
 
                 </GoogleMap>
-                <button onClick={() => getRestaurants()}>test</button>
+                {/* <button onClick={() => getRestaurants()}>test</button> */}
                 
         </Flex>
     )
