@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express"),
   massive = require("massive"),
-  session = require("express-session");
+  session = require("express-session"),
+  userCtrl = require("./controllers/user");
 
 const restaurantCtrl = require('./controllers/resController')
 
@@ -31,8 +32,15 @@ massive({
   })
   .catch(err => console.log(err));
 
+<<<<<<< HEAD
   //Restautant Endpoint!!!///////////
 app.get('/api/restaurants', restaurantCtrl.getRestaurants)
 
 
 
+=======
+app.post("/api/auth/register", userCtrl.register);
+app.post("/api/auth/login", userCtrl.login);
+app.post("/api/auth/logout", userCtrl.logout);
+app.get("/api/auth/user", userCtrl.getUser);
+>>>>>>> 34b0ce2bf5e0e20ee692324dff1734546c99bde7

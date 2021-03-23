@@ -8,14 +8,17 @@ import {
   InputRightElement,
   Button,
   Flex,
+  IconButton,
 } from "@chakra-ui/react";
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Logo } from "../Logo";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Link as ReactLink } from "react-router-dom";
+import { UserContext } from "../context/userContext";
 
 const Register = () => {
+  const userContext = useContext(UserContext);
   let history = useHistory();
   const [state, setState] = useState({
     name: "",
@@ -36,7 +39,14 @@ const Register = () => {
 
   return (
     <>
-      <ArrowBackIcon colorScheme="red" w={8} h={8} onClick={history.goBack} />
+      {/* <ArrowBackIcon colorScheme="red" w={8} h={8} onClick={history.goBack} /> */}
+      <IconButton
+        colorScheme="red"
+        size="md"
+        onClick={history.goBack}
+        icon={<ArrowBackIcon />}
+        variant="ghost"
+      />
       <Flex align="center" justify="center">
         <Flex
           direction={["column", "column", "column", "column"]}
@@ -105,34 +115,48 @@ const Register = () => {
                         }
                       />
                       <InputRightElement>
-                        <Button
+                        <IconButton
                           h="1.75rem"
                           size="sm"
                           mr={4}
                           colorScheme="red"
                           variant="ghost"
                           onClick={handleClick}
-                        >
-                          {state.show ? "Hide" : "Show"}
-                        </Button>
+                          icon={state.show ? <ViewOffIcon /> : <ViewIcon />}
+                        />
                       </InputRightElement>
                     </InputGroup>
                   </FormControl>
                   <FormControl my={5}>
-                    <Input
-                      textAlign="center"
-                      type="password"
-                      name="confirmPassword"
-                      placeholder="Confirm Password"
-                      focusBorderColor="red.400"
-                      borderRadius="100px"
-                      value={state.confirmPassword}
-                      onChange={handleChange}
-                      errorBorderColor="crimson"
-                      isInvalid={
-                        state.password === state.confirmPassword ? false : true
-                      }
-                    />
+                    <InputGroup>
+                      <Input
+                        textAlign="center"
+                        type={state.show ? "text" : "password"}
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        focusBorderColor="red.400"
+                        borderRadius="100px"
+                        value={state.confirmPassword}
+                        onChange={handleChange}
+                        errorBorderColor="crimson"
+                        isInvalid={
+                          state.password === state.confirmPassword
+                            ? false
+                            : true
+                        }
+                      />
+                      <InputRightElement>
+                        <IconButton
+                          h="1.75rem"
+                          size="sm"
+                          mr={4}
+                          colorScheme="red"
+                          variant="ghost"
+                          onClick={handleClick}
+                          icon={state.show ? <ViewOffIcon /> : <ViewIcon />}
+                        />
+                      </InputRightElement>
+                    </InputGroup>
                   </FormControl>
 
                   <Box textAlign="center" m={2}>
@@ -140,7 +164,18 @@ const Register = () => {
                       Already have an account? Sign in
                     </Link>
                   </Box>
-                  <Button width="full" mt={4} colorScheme="red">
+                  <Button
+                    width="full"
+                    mt={4}
+                    colorScheme="red"
+                    onClick={() =>
+                      userContext.register(
+                        state.name,
+                        state.email,
+                        state.password
+                      )
+                    }
+                  >
                     Register
                   </Button>
                 </form>
