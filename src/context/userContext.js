@@ -1,12 +1,15 @@
 import { createContext, useEffect, useState } from "react";
 import { useHistory, useLocation, withRouter } from "react-router";
 import axios from "axios";
+import { useColorMode } from "@chakra-ui/react";
 
 export const UserContext = createContext();
 export const UserProvider = withRouter(props => {
   const [user, setUser] = useState(null);
   const history = useHistory();
   const { path } = useLocation();
+  const { colorMode } = useColorMode();
+  const [mode, setMode] = useState(colorMode);
 
   useEffect(() => {
     if (!user) {
@@ -18,6 +21,9 @@ export const UserProvider = withRouter(props => {
         .catch(err => console.log(err));
     }
   }, []);
+
+  if (colorMode === "dark") setMode("dark");
+  else if (colorMode === "light") setMode("light");
 
   const register = async (name, email, password) => {
     try {
@@ -53,8 +59,11 @@ export const UserProvider = withRouter(props => {
     setUser(null);
     history.push("/login");
   };
+
   return (
-    <UserContext.Provider value={{ user, setUser, register, login, logout }}>
+    <UserContext.Provider
+      value={{ user, mode, setUser, register, login, logout }}
+    >
       {props.children}
     </UserContext.Provider>
   );
