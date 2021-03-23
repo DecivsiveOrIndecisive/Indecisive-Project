@@ -1,23 +1,20 @@
-import {Heading, Container, Flex, Slider, SliderTrack, SliderThumb, SliderFilledTrack, Button, Input } from '@chakra-ui/react'
+import { Heading, Container, Flex, Slider, SliderTrack, SliderThumb, SliderFilledTrack, Button, Box, Input } from '@chakra-ui/react'
 import Map from './Map/Map'
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const Homepage = () => {
     const [distance, setDistance] = useState(8046.72)
-    {console.log(distance)}
-
-    const [center, setCenter] = useState({
-        lat: 40,
-        lng: -111
-    })
+    const [center, setCenter] = useState({ lat: 40, lng: -111 })
     const [restaurants, setRestaurants] = useState([])
+    // console.log(distance)
+    console.log(center)
     console.log(restaurants)
+
     useEffect(() => {
         fetchLocation()
     }, [])
-    console.log(center)
-    
+
     const fetchLocation = () => {
         navigator.geolocation.getCurrentPosition((position) => {
             setCenter({
@@ -25,7 +22,7 @@ const Homepage = () => {
                 lng: position.coords.longitude
             })
         }, _ => null)
-        
+
     }
 
     const getRestaurants = async () => {
@@ -33,6 +30,17 @@ const Homepage = () => {
         const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&range=${distance}`)
         setRestaurants(res.data)
     }
+
+       
+    
+      const mapRestaurants = restaurants.map((food, i) => {
+        return (
+          <div key={food.references}>
+            <p>{food.name}</p>
+            <p>{food.vicinity}</p>
+          </div>
+        );
+      });
 
 
     return (
@@ -55,11 +63,35 @@ const Homepage = () => {
                     </Slider>
                     <Map />
                     <Container centerContent m={3}>
-                        <Button size='lg' onClick={() => getRestaurants()}>Go</Button>
+                       <Button size='lg' onClick={() => getRestaurants()}>Go</Button>
                     </Container>
                 </Container>
             </Flex>
+                                       
+            {mapRestaurants}
+
+
+
+
         </section>
     )
 }
 export default Homepage
+
+
+// Perform a nearby search.
+// service.nearbySearch(
+//     { location: pyrmont, radius: 500, type: "store" },
+//     (results, status, pagination) => {
+//       if (status !== "OK" || !results) return;
+//       addPlaces(results, map);
+//       moreButton.disabled = !pagination || !pagination.hasNextPage;
+
+//       if (pagination && pagination.hasNextPage) {
+//         getNextPage = () => {
+//           // Note: nextPage will call the same handler function as the initial call
+//           pagination.nextPage();
+//         };
+//       }
+//     }
+//   );
