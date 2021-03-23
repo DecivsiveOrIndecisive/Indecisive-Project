@@ -9,15 +9,15 @@ export const UserProvider = withRouter(props => {
   const { path } = useLocation();
 
   useEffect(() => {
-    if (!user && path !== "/login") {
+    if (!user) {
+      axios
+        .get("/api/auth/user")
+        .then(res => {
+          setUser(res.data);
+        })
+        .catch(err => console.log(err));
     }
-  }, [user, path]);
-
-  useEffect(() => {
-    if (user && path === "/") {
-      history.push("/");
-    }
-  }, [user, path]);
+  }, []);
 
   const register = async (name, email, password) => {
     try {

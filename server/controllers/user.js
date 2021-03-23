@@ -59,4 +59,12 @@ module.exports = {
     req.session.destroy();
     res.json({ isLoggedIn: false });
   },
+
+  getUser: async (req, res) => {
+    if (req.session.user) {
+      return res.status(200).send(req.session.user);
+    } else {
+      return res.sendStatus(404);
+    }
+  },
 };
