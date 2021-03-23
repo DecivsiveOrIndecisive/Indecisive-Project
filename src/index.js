@@ -14,10 +14,8 @@ ReactDOM.render(
   <StrictMode>
       <Router>
           <UserProvider>
-              <MapProvider>
                 <ColorModeScript />
                 <App />
-              </MapProvider>
           </UserProvider>
       </Router>
   </StrictMode>,
