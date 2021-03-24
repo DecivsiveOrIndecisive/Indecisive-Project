@@ -9,8 +9,8 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-// import mapStyleLight from "./mapStyleLight";
-import mapStyleDark from "./mapStyleDark";
+import mapStyleLight from "./mapStyleLight";
+// import mapStyleDark from "./mapStyleDark";
 import { Flex } from "@chakra-ui/react";
 
 const libraries = ["places"];
@@ -20,7 +20,7 @@ const mapContainerStyle = {
 };
 
 const options = {
-  styles: mapStyleDark,
+  styles: mapStyleLight,
 };
 
 function Map() {
