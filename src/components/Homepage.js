@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import MapDark from "./Map/Map";
 import MapLight from "./Map/MapLight";
+import { Link } from "react-router-dom";
 
 const Homepage = () => {
   const { colorMode } = useColorMode();
@@ -57,9 +58,11 @@ const Homepage = () => {
           </Slider>
           {colorMode === "dark" ? <MapDark /> : <MapLight />}
           <Container centerContent m={3}>
-            <Button size="lg" colorScheme="red">
-              Go
-            </Button>
+            <Link to="/result">
+              <Button size="lg" colorScheme="red">
+                Go
+              </Button>
+            </Link>
           </Container>
         </Container>
       </Flex>
