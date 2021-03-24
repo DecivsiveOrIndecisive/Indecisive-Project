@@ -9,7 +9,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import mapStyleLight from "./mapStyleLight";
+// import mapStyleLight from "./mapStyleLight";
 import mapStyleDark from "./mapStyleDark";
 import { Flex } from "@chakra-ui/react";
 

@@ -1,12 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { useHistory, useLocation, withRouter } from "react-router";
+import { useHistory, withRouter } from "react-router";
 import axios from "axios";
 
 export const UserContext = createContext();
 export const UserProvider = withRouter(props => {
   const [user, setUser] = useState(null);
   const history = useHistory();
-  const { path } = useLocation();
 
   useEffect(() => {
     if (!user) {
@@ -53,6 +52,7 @@ export const UserProvider = withRouter(props => {
     setUser(null);
     history.push("/login");
   };
+
   return (
     <UserContext.Provider value={{ user, setUser, register, login, logout }}>
       {props.children}

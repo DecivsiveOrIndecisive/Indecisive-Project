@@ -38,6 +38,7 @@ const Homepage = () => {
           <div key={food.references}>
             <p>{food.name}</p>
             <p>{food.vicinity}</p>
+            <p>{food.rating}</p>
           </div>
         );
       });
