@@ -16,11 +16,7 @@ import { Link } from "react-router-dom";
 
 const Homepage = () => {
   const { colorMode } = useColorMode();
-  if (colorMode === "dark") {
-    console.log("dark!!");
-  } else {
-    console.log("light!!");
-  }
+
   return (
     <section>
       <Flex
