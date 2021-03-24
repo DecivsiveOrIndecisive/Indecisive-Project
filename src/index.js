@@ -13,12 +13,14 @@ const Router =
 
 ReactDOM.render(
   <StrictMode>
-    <Router>
-      <UserProvider>
-        <ColorModeScript />
-        <App />
-      </UserProvider>
-    </Router>
+      <Router>
+          <UserProvider>
+                <MapProvider>
+                    <ColorModeScript />
+                    <App />
+                </MapProvider>
+          </UserProvider>
+      </Router>
   </StrictMode>,
   document.getElementById("root")
 );
