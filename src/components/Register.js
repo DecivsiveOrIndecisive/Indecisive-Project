@@ -8,8 +8,9 @@ import {
   InputRightElement,
   Button,
   Flex,
+  IconButton,
 } from "@chakra-ui/react";
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Logo } from "../Logo";
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
@@ -38,7 +39,14 @@ const Register = () => {
 
   return (
     <>
-      <ArrowBackIcon colorScheme="red" w={8} h={8} onClick={history.goBack} />
+      {/* <ArrowBackIcon colorScheme="red" w={8} h={8} onClick={history.goBack} /> */}
+      <IconButton
+        colorScheme="red"
+        size="md"
+        onClick={history.goBack}
+        icon={<ArrowBackIcon />}
+        variant="ghost"
+      />
       <Flex align="center" justify="center">
         <Flex
           direction={["column", "column", "column", "column"]}
@@ -107,16 +115,15 @@ const Register = () => {
                         }
                       />
                       <InputRightElement>
-                        <Button
+                        <IconButton
                           h="1.75rem"
                           size="sm"
                           mr={4}
                           colorScheme="red"
                           variant="ghost"
                           onClick={handleClick}
-                        >
-                          {state.show ? "Hide" : "Show"}
-                        </Button>
+                          icon={state.show ? <ViewOffIcon /> : <ViewIcon />}
+                        />
                       </InputRightElement>
                     </InputGroup>
                   </FormControl>
@@ -139,16 +146,15 @@ const Register = () => {
                         }
                       />
                       <InputRightElement>
-                        <Button
+                        <IconButton
                           h="1.75rem"
                           size="sm"
                           mr={4}
                           colorScheme="red"
                           variant="ghost"
                           onClick={handleClick}
-                        >
-                          {state.show ? "Hide" : "Show"}
-                        </Button>
+                          icon={state.show ? <ViewOffIcon /> : <ViewIcon />}
+                        />
                       </InputRightElement>
                     </InputGroup>
                   </FormControl>

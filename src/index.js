@@ -1,14 +1,15 @@
-import { ColorModeScript } from '@chakra-ui/react';
-import React, { StrictMode } from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import * as serviceWorker from './serviceWorker';
-import {HashRouter, BrowserRouter} from 'react-router-dom'
-import { UserProvider } from './context/userContext';
-import { MapProvider } from './context/mapContext';
+import { ColorModeScript } from "@chakra-ui/react";
+import React, { StrictMode } from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import * as serviceWorker from "./serviceWorker";
+import { HashRouter, BrowserRouter } from "react-router-dom";
+import { UserProvider } from "./context/userContext";
+import { MapProvider } from "./context/mapContext";
 
-const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter
+const Router =
+  process.env.NODE_ENV === "development" ? HashRouter : BrowserRouter;
 
 ReactDOM.render(
   <StrictMode>
@@ -21,7 +22,7 @@ ReactDOM.render(
           </UserProvider>
       </Router>
   </StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
