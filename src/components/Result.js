@@ -9,8 +9,9 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/userContext";
+import axios from "axios";
 
 const Result = () => {
   const userContext = useContext(UserContext);
@@ -30,9 +31,38 @@ const Result = () => {
 
   const savePlace = () => {
     alert(userContext.user);
-    setState({ ...state, isSaved: !state.isSaved });
+    setState({ ...state, isSaved: true });
     userContext.savePlace(testResult);
   };
+
+  const getPlaces = async () => {
+    if (userContext.user) {
+      await axios
+        .get("/api/posts/getSaved", {
+          params: { user_id: userContext.user.id },
+        })
+        .then(res => {
+          const saved = res.data;
+          const filtered = saved.filter(
+            place => place.place_key === testResult.place_id
+          );
+          console.log(filtered);
+          console.log(testResult);
+          if (filtered.length > 0) {
+            console.log("setting true!");
+            setState({ ...state, isSaved: true });
+          } else {
+            setState({ ...state, isSaved: false });
+            console.log("setting false!");
+          }
+        })
+        .catch(err => console.log(err));
+    }
+  };
+
+  useEffect(() => {
+    getPlaces();
+  }, []);
 
   return (
     <Flex align="center" justify="center" direction="column">
@@ -81,8 +111,12 @@ const Result = () => {
         </Box>
         {userContext.user ? (
           <Flex justify="center" my={4}>
-            <Button colorScheme="red" onClick={() => savePlace()}>
-              {state.isSaved ? "Add to Favorites" : "Remove from Favorites"}
+            <Button
+              colorScheme="red"
+              onClick={() => savePlace()}
+              isDisabled={state.isSaved ? true : false}
+            >
+              {!state.isSaved ? "Add to Favorites" : "Added to Favorites!"}
             </Button>
           </Flex>
         ) : (

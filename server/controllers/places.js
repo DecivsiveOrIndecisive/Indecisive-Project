@@ -36,7 +36,7 @@ module.exports = {
 
     await db.favorites.destroy({ place_key: place_key, fav_user: user_id });
 
-    console.log(req.body);
+    // console.log(req.body);
 
     return res.status(200).send("removed from favorites");
   },
