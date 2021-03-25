@@ -7,6 +7,8 @@ const Homepage = () => {
     const [distance, setDistance] = useState(8046.72)
     const [center, setCenter] = useState({ lat: 40, lng: -111 })
     const [restaurants, setRestaurants] = useState([])
+    const [keyword, Setkeyword] = useState('')
+    const [list, setList] = useState(['burger', 'mexican', 'pizza', 'chinese', 'italian'])
     console.log(distance)
     console.log(center)
     console.log(restaurants)
@@ -32,20 +34,29 @@ const Homepage = () => {
 
     const getRestaurants = async () => {
         console.log(center)
-        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}`)
+        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
         setRestaurants(res.data)
+        setDistance(distance + 500)
+        console.log(res)
     }
+    const getRandom = function (arr) {
+        Setkeyword(arr[Math.floor((Math.random()*arr.length))]) ;
+      } 
 
     const getMore = () => {
-        setDistance(distance + 5000)
         console.log(distance)
-
+        setDistance(distance + 500)
         console.log(restaurants)
-        axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&range=${distance}`)
-        .then(res =>{
-            setRestaurants(restaurants.concat(res.data))
+        getRandom(list)
+          
+          console.log(keyword)
 
-        })
+        // setCenter({lat: center.lat + Math.random(), lng: center.lng + Math.random() })
+        // axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&range=${distance}`)
+        // .then(res =>{
+        //     setRestaurants(restaurants.concat(res.data))
+
+        // })
         
         // const testArr = restaurants.concat(res.data)
         console.log(restaurants)
