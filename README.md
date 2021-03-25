@@ -12,7 +12,8 @@ CREATE TABLE users (
 ```sql
 CREATE TABLE favorites (
     fav_id SERIAL PRIMARY KEY,
-    fav_place JSON NOT NULL,
+    place_key TEXT
+    place_details JSON NOT NULL,
     fav_user INT REFERENCES users(user_id)
 )
 ```

@@ -40,3 +40,4 @@ app.get("/api/auth/user", userCtrl.getUser);
 //* Place endpoints
 app.post("/api/posts/save", placeCtrl.savePlace);
 app.get("/api/posts/getSaved", placeCtrl.getSaved);
+app.delete("/api/post/deleteSaved", placeCtrl.deleteSaved);
