@@ -34,6 +34,7 @@ massive({
 
   //Restautant Endpoint!!!///////////
 app.get('/api/restaurants', restaurantCtrl.getRestaurants)
+app.get('/api/moreRestaurants', restaurantCtrl.getMoreRestaurants)
 
 
 

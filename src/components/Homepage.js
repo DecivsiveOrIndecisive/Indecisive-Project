@@ -8,16 +8,17 @@ const Homepage = () => {
     const [center, setCenter] = useState({ lat: 40, lng: -111 })
     const [restaurants, setRestaurants] = useState([])
     const [keyword, Setkeyword] = useState('')
-    const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery', 'meal_takeaway' ])
-    console.log(distance)
-    console.log(center)
+    const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery' ])
+    const [token, setToken] = useState('')
+    // console.log(distance)
+    // console.log(center)
     console.log(restaurants)
     console.log(keyword)
-   
+    console.log(token)
 
     useEffect(() => {
         fetchLocation()
-        getRandom(list)
+        getRandomKeyword(list)
         console.log(center)
         console.log(restaurants)
         console.log(distance)
@@ -35,23 +36,47 @@ const Homepage = () => {
     // const newRes = ['test4']
 
     const getRestaurants = async () => {
-        console.log(center)
-        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
-        setRestaurants(res.data)
-        setDistance(distance + 500)
-        console.log(res)
+        // console.log(center)
+        // const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
+        // setRestaurants(res.data.data)
+        // setToken(res.data.token)
+        
+
+        // setTimeout(() => {
+        //     axios.get(`/api/moreRestaurants?token=${token}`)
+        //     .then(res => {
+        //         // setRestaurants(restaurants.concat(res.data))
+        //         console.log(res.data)
+        //     }
+        //         ).catch('weird error')
+        //     }, 10000)
+
+        // console.log(res)
+        console.log(token)
     }
-    const getRandom = function (arr) {
+                
+    const getRandomKeyword = function (arr) {
         Setkeyword(arr[Math.floor((Math.random()*arr.length))]) ;
       } 
 
     const getMore = () => {
-        console.log(distance)
-        setDistance(distance + 500)
-        console.log(restaurants)
+        axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
+        .then(res => {
+            setRestaurants(res.data.data)
+            setToken(res.data.token)
+            setTimeout(() => {
+            axios.get(`/api/moreRestaurants?token=${token}`)
+            .then(res => {
+                // setRestaurants(restaurants.concat(res.data))
+                console.log(res.data)
+            }
+                ).catch('weird error')
+            }, 20000)
+        }
+
+        )
         
-          
-          console.log(keyword)
+        
 
         // setCenter({lat: center.lat + Math.random(), lng: center.lng + Math.random() })
         // axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&range=${distance}`)
@@ -65,15 +90,15 @@ const Homepage = () => {
     }
        
     
-    //   const mapRestaurants = restaurants.map((food) => {
-    //     return (
-    //       <div key={food.reference}>
-    //         <p>{food.name}</p>
-    //         <p>{food.vicinity}</p>
-    //         <p>{food.rating}</p>
-    //       </div>
-    //     );
-    //   });
+      const mapRestaurants = restaurants.map((food) => {
+        return (
+          <div key={food.reference}>
+            <p>{food.name}</p>
+            <p>{food.vicinity}</p>
+            <p>{food.rating}</p>
+          </div>
+        );
+      });
 
     // const filtered = restaurants.filter((place, i) => {
 
@@ -105,7 +130,7 @@ const Homepage = () => {
                 </Container>
             </Flex>
                                        
-            {/* {mapRestaurants} */}
+            {mapRestaurants}
 
 
 
