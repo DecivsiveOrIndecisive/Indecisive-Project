@@ -8,14 +8,16 @@ const Homepage = () => {
     const [center, setCenter] = useState({ lat: 40, lng: -111 })
     const [restaurants, setRestaurants] = useState([])
     const [keyword, Setkeyword] = useState('')
-    const [list, setList] = useState(['burger', 'mexican', 'pizza', 'chinese', 'italian'])
+    const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery', 'meal_takeaway' ])
     console.log(distance)
     console.log(center)
     console.log(restaurants)
+    console.log(keyword)
    
 
     useEffect(() => {
         fetchLocation()
+        getRandom(list)
         console.log(center)
         console.log(restaurants)
         console.log(distance)
@@ -47,7 +49,7 @@ const Homepage = () => {
         console.log(distance)
         setDistance(distance + 500)
         console.log(restaurants)
-        getRandom(list)
+        
           
           console.log(keyword)
 
