@@ -7,12 +7,16 @@ const Homepage = () => {
     const [distance, setDistance] = useState(8046.72)
     const [center, setCenter] = useState({ lat: 40, lng: -111 })
     const [restaurants, setRestaurants] = useState([])
-    // console.log(distance)
+    console.log(distance)
     console.log(center)
     console.log(restaurants)
+   
 
     useEffect(() => {
         fetchLocation()
+        console.log(center)
+        console.log(restaurants)
+        console.log(distance)
     }, [])
 
     const fetchLocation = () => {
@@ -24,25 +28,43 @@ const Homepage = () => {
         }, _ => null)
 
     }
+    // const newRes = ['test4']
 
     const getRestaurants = async () => {
         console.log(center)
-        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&range=${distance}`)
+        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}`)
         setRestaurants(res.data)
     }
 
+    const getMore = () => {
+        setDistance(distance + 5000)
+        console.log(distance)
+
+        console.log(restaurants)
+        axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&range=${distance}`)
+        .then(res =>{
+            setRestaurants(restaurants.concat(res.data))
+
+        })
+        
+        // const testArr = restaurants.concat(res.data)
+        console.log(restaurants)
+    }
        
     
-      const mapRestaurants = restaurants.map((food) => {
-        return (
-          <div key={food.references}>
-            <p>{food.name}</p>
-            <p>{food.vicinity}</p>
-            <p>{food.rating}</p>
-          </div>
-        );
-      });
+    //   const mapRestaurants = restaurants.map((food) => {
+    //     return (
+    //       <div key={food.reference}>
+    //         <p>{food.name}</p>
+    //         <p>{food.vicinity}</p>
+    //         <p>{food.rating}</p>
+    //       </div>
+    //     );
+    //   });
 
+    // const filtered = restaurants.filter((place, i) => {
+
+    // })
 
     return (
         <section>
@@ -65,11 +87,12 @@ const Homepage = () => {
                     <Map />
                     <Container centerContent m={3}>
                        <Button size='lg' onClick={() => getRestaurants()}>Go</Button>
+                       <Button size='lg' onClick={() => getMore()}>Go Again</Button>
                     </Container>
                 </Container>
             </Flex>
                                        
-            {mapRestaurants}
+            {/* {mapRestaurants} */}
 
 
 
