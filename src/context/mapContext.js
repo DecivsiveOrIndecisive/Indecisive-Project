@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import { useHistory, useLocation, withRouter } from "react-router"
+import { useHistory, useLocation } from "react-router"
 
 
 export const MapContext = createContext()
