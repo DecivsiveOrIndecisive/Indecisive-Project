@@ -5,6 +5,8 @@ const express = require("express"),
   userCtrl = require("./controllers/user"),
   placeCtrl = require("./controllers/places");
 
+const restaurantCtrl = require('./controllers/resController')
+
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
 const app = express();
@@ -31,7 +33,12 @@ massive({
   })
   .catch(err => console.log(err));
 
-//* Auth endpoints
+  //Restautant Endpoint!!!///////////
+app.get('/api/restaurants', restaurantCtrl.getRestaurants)
+app.get('/api/moreRestaurants', restaurantCtrl.getMoreRestaurants)
+
+
+//Auth Endpoints
 app.post("/api/auth/register", userCtrl.register);
 app.post("/api/auth/login", userCtrl.login);
 app.post("/api/auth/logout", userCtrl.logout);
