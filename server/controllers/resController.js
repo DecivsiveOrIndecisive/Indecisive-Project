@@ -16,6 +16,7 @@ module.exports = {
 
     getMoreRestaurants: async (req, res) => {
         const {token} = req.query
+        console.log(token)
         let data = []
         await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${token}&key=${REACT_APP_GOOGLE_MAPS_API_KEY}`)
             .then(res => {

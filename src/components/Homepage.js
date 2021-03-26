@@ -10,11 +10,13 @@ const Homepage = () => {
     const [keyword, Setkeyword] = useState('')
     const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery' ])
     const [token, setToken] = useState('')
+    const [moreRestaurants, setMoreRestaurants] = useState([])
     // console.log(distance)
     // console.log(center)
     console.log(restaurants)
     console.log(keyword)
     console.log(token)
+    console.log(moreRestaurants)
 
     useEffect(() => {
         fetchLocation()
@@ -37,9 +39,9 @@ const Homepage = () => {
 
     const getRestaurants = async () => {
         // console.log(center)
-        // const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
-        // setRestaurants(res.data.data)
-        // setToken(res.data.token)
+        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
+        setRestaurants(res.data.data)
+        setToken(res.data.token)
         
 
         // setTimeout(() => {
@@ -59,22 +61,26 @@ const Homepage = () => {
         Setkeyword(arr[Math.floor((Math.random()*arr.length))]) ;
       } 
 
-    const getMore = () => {
-        axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
-        .then(res => {
-            setRestaurants(res.data.data)
-            setToken(res.data.token)
-            setTimeout(() => {
-            axios.get(`/api/moreRestaurants?token=${token}`)
-            .then(res => {
-                // setRestaurants(restaurants.concat(res.data))
-                console.log(res.data)
-            }
-                ).catch('weird error')
-            }, 20000)
-        }
+    const getMore = async () => {
+        const res = await axios.get(`/api/moreRestaurants?token=${token}`)
+        setMoreRestaurants(res.data)
+        console.log(moreRestaurants)
 
-        )
+
+        // axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
+        // .then(res => {
+        //     setRestaurants(res.data.data)
+        //     setToken(res.data.token)
+        //     setTimeout(() => {
+        //         .then(res => {
+        //             // setRestaurants(restaurants.concat(res.data))
+        //             console.log(res.data)
+        //         }
+        //         ).catch('weird error')
+        //     }, 20000)
+        // }
+        
+        // )
         
         
 
@@ -86,19 +92,19 @@ const Homepage = () => {
         // })
         
         // const testArr = restaurants.concat(res.data)
-        console.log(restaurants)
+        
     }
        
     
-      const mapRestaurants = restaurants.map((food) => {
-        return (
-          <div key={food.reference}>
-            <p>{food.name}</p>
-            <p>{food.vicinity}</p>
-            <p>{food.rating}</p>
-          </div>
-        );
-      });
+    //   const mapRestaurants = restaurants.map((food) => {
+    //     return (
+    //       <div key={food.reference}>
+    //         <p>{food.name}</p>
+    //         <p>{food.vicinity}</p>
+    //         <p>{food.rating}</p>
+    //       </div>
+    //     );
+    //   });
 
     // const filtered = restaurants.filter((place, i) => {
 
@@ -130,7 +136,7 @@ const Homepage = () => {
                 </Container>
             </Flex>
                                        
-            {mapRestaurants}
+            {/* {mapRestaurants} */}
 
 
 
