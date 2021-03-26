@@ -14,7 +14,8 @@
     "price_level": 1,
     "rating": 3.4,
     "vicinity": "1211 W 800 N, Orem",
-    "user_ratings_total": 2909
+    "user_ratings_total": 2909,
+    "place_id": "ChIJjYTee9CETYcRkwnSzHk83IM"
   },
   {
     "name": "Culver's",
@@ -31,6 +32,7 @@
     "price_level": 1,
     "rating": 3.4,
     "vicinity": "1211 W 800 N, Orem",
-    "user_ratings_total": 2909
+    "user_ratings_total": 2909,
+    "place_id": "ChIJjYTee9CETYcRkwnSzHk83IM"
   }
 ]

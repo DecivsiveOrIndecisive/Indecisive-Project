@@ -53,8 +53,28 @@ export const UserProvider = withRouter(props => {
     history.push("/login");
   };
 
+  const savePlace = async result => {
+    await axios
+      .post("/api/posts/save", { result, user })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const getFavorite = async () => {
+    await axios
+      .get("/api/posts/getSaved", { params: { user_id: user.id } })
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => console.log(err));
+  };
+
   return (
-    <UserContext.Provider value={{ user, setUser, register, login, logout }}>
+    <UserContext.Provider
+      value={{ user, setUser, register, login, logout, savePlace, getFavorite }}
+    >
       {props.children}
     </UserContext.Provider>
   );

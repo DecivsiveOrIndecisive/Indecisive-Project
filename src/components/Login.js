@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Logo } from "../Logo";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link as ReactLink } from "react-router-dom";
 import { UserContext } from "../context/userContext";
@@ -25,6 +25,11 @@ const Login = () => {
     password: "",
     show: false,
   });
+
+  useEffect(() => {
+    if (userContext.user) history.push("/");
+  }, [userContext.user]);
+
   const handleClick = () => setState({ ...state, show: !state.show });
 
   const handleChange = e => {
