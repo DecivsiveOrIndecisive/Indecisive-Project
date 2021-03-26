@@ -24,50 +24,72 @@ const options = {
 };
 
 function Map() {
-  const [center, setCenter] = useState({
-    lat: 40,
-    lng: -111,
-  });
-  useEffect(() => {
-    fetchLocation();
-  }, []);
+    const [center, setCenter] = useState({
+        lat: 40,
+        lng: -111
+    })
+    // const [restaurants, setRestaurants] = useState([])
+    // console.log(restaurants)
+    // useEffect(() => {
+    //     fetchLocation()
+    //     // getRestaurants()
+    // }, [])
 
-  const fetchLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        setCenter({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      },
-      _ => null
-    );
-  };
+    // const fetchLocation = () => {
+    //     navigator.geolocation.getCurrentPosition((position) => {
+    //         setCenter({
+    //             lat: position.coords.latitude,
+    //             lng: position.coords.longitude
+    //         })
+    //     }, _ => null)
+        
+    // }
 
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries,
-  });
+    // const getRestaurants = async () => {
+    //     console.log(center.lat)
+    //     const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}`)
+    //     setRestaurants(res.data)
+    // }
+    
+    
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        libraries,
+    })
 
-  if (loadError) return "Error loading maps!";
-  if (!isLoaded) return "Loading maps!";
 
-  return (
-    <Flex>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={14}
-        center={center}
-        options={options}
-        // onClick={onMapClick}
-        // onLoad={onMapLoad}
-      >
-        {/* <Marker
-                        position={{ lat: center.lat, lng: center.lng }}
-                    /> */}
-      </GoogleMap>
-    </Flex>
-  );
+    if (loadError) return 'Error loading maps!'
+    if (!isLoaded) return 'Loading maps!'
+
+    
+
+
+
+    return(
+        <Flex>
+                <GoogleMap
+                    mapContainerStyle={mapContainerStyle}
+                    zoom={14}
+                    center={center}
+                    options={options}
+                    // onClick={onMapClick}
+                    // onLoad={onMapLoad}
+
+                >
+
+                    {/* {restaurants.map((food, i) => (
+                        <Marker
+                            key={i}
+                            position={{lat: food.geometry.location.lat, lng: food.geometry.location.lng}}
+                        />
+                    ))} */}
+                   
+
+                </GoogleMap>
+                {/* <button onClick={() => getRestaurants()}>test</button> */}
+                
+        </Flex>
+    )
 }
 
 export default Map;
