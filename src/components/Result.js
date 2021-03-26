@@ -1,24 +1,22 @@
 import places from "../temp/places.json";
-import {
-  Box,
-  Flex,
-  Text,
-  Image,
-  Badge,
-  Heading,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Flex, Image, Badge, Heading, Button } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { useState, useContext, useEffect } from "react";
+import { useHistory } from "react-router";
 import { UserContext } from "../context/userContext";
 import axios from "axios";
 
 const Result = () => {
+  const history = useHistory();
   const userContext = useContext(UserContext);
   const [state, setState] = useState({
     isSaved: false,
+    isBlacklisted: false,
   });
+
+  //! this is the temp variable that needs to be replaced!
   const [testResult] = places;
+
   const calculatePrice = () => {
     let arr = [];
     for (let i = 0; i < testResult.price_level; i++) {
@@ -30,9 +28,13 @@ const Result = () => {
   const price = calculatePrice();
 
   const savePlace = () => {
-    alert(userContext.user);
     setState({ ...state, isSaved: true });
     userContext.savePlace(testResult);
+  };
+
+  const blacklistPlace = () => {
+    userContext.blacklistPlace(testResult);
+    history.push("/");
   };
 
   const getPlaces = async () => {
@@ -110,7 +112,7 @@ const Result = () => {
           <Box colorScheme="red">{price}</Box>
         </Box>
         {userContext.user ? (
-          <Flex justify="center" my={4}>
+          <Flex justify="space-evenly" my={4}>
             <Button
               colorScheme="red"
               onClick={() => savePlace()}
@@ -118,6 +120,14 @@ const Result = () => {
             >
               {!state.isSaved ? "Add to Favorites" : "Added to Favorites!"}
             </Button>
+
+            {!state.isSaved ? (
+              <Button colorScheme="red" onClick={() => blacklistPlace()}>
+                Get this outta here
+              </Button>
+            ) : (
+              ""
+            )}
           </Flex>
         ) : (
           ""
