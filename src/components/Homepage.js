@@ -1,18 +1,18 @@
 import { Heading, Container, Flex, Slider, SliderTrack, SliderThumb, SliderFilledTrack, Button, Box, Input } from '@chakra-ui/react'
 import Map from './Map/Map'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
+import { MapContext } from '../context/mapContext'
 
 const Homepage = () => {
-    const [distance, setDistance] = useState(8046.72)
-    const [center, setCenter] = useState({ lat: 40, lng: -111 })
-    const [restaurants, setRestaurants] = useState([])
-    const [keyword, Setkeyword] = useState('')
-    const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery' ])
-    const [token, setToken] = useState('')
-    const [moreRestaurants, setMoreRestaurants] = useState([])
-    // console.log(distance)
-    // console.log(center)
+    const {fetchLocation, keyword, getRandomKeyword, restaurants, getRestaurants, getMore, center, distance, setDistance, token, moreRestaurants}  = useContext(MapContext)
+    // const [distance, setDistance] = useState(8046.72)
+    // const [center, setCenter] = useState({ lat: 40, lng: -111 })
+    // const [keyword, Setkeyword] = useState('')
+    // const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery' ])
+    
+    console.log(distance)
+    console.log(center)
     console.log(restaurants)
     console.log(keyword)
     console.log(token)
@@ -20,52 +20,53 @@ const Homepage = () => {
 
     useEffect(() => {
         fetchLocation()
-        getRandomKeyword(list)
-        console.log(center)
-        console.log(restaurants)
-        console.log(distance)
+        getRandomKeyword()
+        // console.log(center)
+        // console.log(restaurants)
+        // console.log(distance)
     }, [])
 
-    const fetchLocation = () => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setCenter({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            })
-        }, _ => null)
+    // const fetchLocation = () => {
+    //     navigator.geolocation.getCurrentPosition((position) => {
+    //         setCenter({
+    //             lat: position.coords.latitude,
+    //             lng: position.coords.longitude
+    //         })
+    //     }, _ => null)
 
-    }
+    // }
     // const newRes = ['test4']
 
-    const getRestaurants = async () => {
-        // console.log(center)
-        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
-        setRestaurants(res.data.data)
-        setToken(res.data.token)
+    // const getRestaurants = async () => {
+    //     // console.log(center)
+    //     const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
+    //     setRestaurants(res.data.data)
+    //     setToken(res.data.token)
         
 
-        // setTimeout(() => {
-        //     axios.get(`/api/moreRestaurants?token=${token}`)
-        //     .then(res => {
-        //         // setRestaurants(restaurants.concat(res.data))
-        //         console.log(res.data)
-        //     }
-        //         ).catch('weird error')
-        //     }, 10000)
+    //     // setTimeout(() => {
+    //     //     axios.get(`/api/moreRestaurants?token=${res.data.token}`)
+    //     //     .then(res => {
+    //     //         setMoreRestaurants(res.data)
+    //     //         console.log(res.data)
+    //     //     }
+    //     //         ).catch('weird error')
+    //     //     }, 5000)
 
-        // console.log(res)
-        console.log(token)
-    }
+    //     // console.log(res)
+    //     console.log(token)
+    // }
                 
-    const getRandomKeyword = function (arr) {
-        Setkeyword(arr[Math.floor((Math.random()*arr.length))]) ;
-      } 
+    // const getRandomKeyword = function (arr) {
+    //     Setkeyword(arr[Math.floor((Math.random()*arr.length))]) ;
+    //   } 
 
-    const getMore = async () => {
-        const res = await axios.get(`/api/moreRestaurants?token=${token}`)
-        setMoreRestaurants(res.data)
-        console.log(moreRestaurants)
-
+    // const getMore = async () => {
+    //     const res = await axios.get(`/api/moreRestaurants?token=${token}`)
+    //     setMoreRestaurants(res.data)
+    //     console.log(moreRestaurants)
+        
+    // }
 
         // axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
         // .then(res => {
@@ -93,7 +94,6 @@ const Homepage = () => {
         
         // const testArr = restaurants.concat(res.data)
         
-    }
        
     
     //   const mapRestaurants = restaurants.map((food) => {
@@ -130,8 +130,8 @@ const Homepage = () => {
                     </Slider>
                     <Map />
                     <Container centerContent m={3}>
-                       <Button size='lg' onClick={() => getRestaurants()}>Go</Button>
-                       <Button size='lg' onClick={() => getMore()}>Go Again</Button>
+                       <Button size='lg' onClick={getRestaurants}>Go</Button>
+                       <Button size='lg' onClick={ getMore}>Go Again</Button>
                     </Container>
                 </Container>
             </Flex>
