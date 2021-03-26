@@ -1,17 +1,19 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useState } from "react"
 import { useHistory, useLocation, withRouter } from "react-router"
 import axios from 'axios'
 
 
 export const MapContext = createContext()
 export const MapProvider = (props => {
+    
     const [distance, setDistance] = useState(8046.72)
     const [center, setCenter] = useState({ lat: 40, lng: -111 })
-    const [keyword, Setkeyword] = useState('')
+    const [keyword, setKeyword] = useState('')
     const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery' ])
     const [restaurants, setRestaurants] = useState([])
     const [token, setToken] = useState('')
     const [moreRestaurants, setMoreRestaurants] = useState([])
+    const [result, setResult] = useState(null)
    
     
     const fetchLocation = () => {
@@ -25,7 +27,11 @@ export const MapProvider = (props => {
     }
 
     const getRandomKeyword = function () {
-        Setkeyword(list[Math.floor((Math.random()*list.length))]) ;
+        setKeyword(list[Math.floor((Math.random()*list.length))]) ;
+      } 
+    
+      const getResult = function () {
+        setResult(restaurants[Math.floor((Math.random()*restaurants.length))]);
       } 
 
     const getRestaurants = async () => {
@@ -33,6 +39,7 @@ export const MapProvider = (props => {
         const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
         setRestaurants(res.data.data)
         setToken(res.data.token)
+
         
         ////////////// TEST LATER///////////////////
         // setTimeout(() => {
@@ -53,7 +60,7 @@ export const MapProvider = (props => {
     }
 
     return (
-        <MapContext.Provider value={{fetchLocation, keyword, getRandomKeyword, restaurants, getRestaurants, getMore, center, distance, setDistance, token, moreRestaurants}}>
+        <MapContext.Provider value={{fetchLocation, keyword, getRandomKeyword, getRandomKeyword, restaurants, getRestaurants, getMore, center, distance, setDistance, token, moreRestaurants, getResult, result}}>
             {props.children}
         </MapContext.Provider>
     )

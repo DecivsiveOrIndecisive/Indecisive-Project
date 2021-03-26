@@ -30,7 +30,11 @@ const Nav = () => {
         {userContext.user ? (
           <Text>
             Hello,{" "}
-            <ChakraLink color="red.500">{userContext.user.username}</ChakraLink>
+            <Link to="/favorites">
+              <ChakraLink color="red.500">
+                {userContext.user.username}
+              </ChakraLink>
+            </Link>
           </Text>
         ) : (
           ""

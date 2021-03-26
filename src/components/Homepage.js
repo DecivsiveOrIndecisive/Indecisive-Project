@@ -3,12 +3,13 @@ import Map from './Map/Map'
 import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { MapContext } from '../context/mapContext'
+import {Link} from 'react-router-dom'
 
 const Homepage = () => {
     const {fetchLocation, keyword, getRandomKeyword, restaurants, getRestaurants, getMore, center, distance, setDistance, token, moreRestaurants}  = useContext(MapContext)
     // const [distance, setDistance] = useState(8046.72)
     // const [center, setCenter] = useState({ lat: 40, lng: -111 })
-    // const [keyword, Setkeyword] = useState('')
+    // const [keyword, setKeyword] = useState('')
     // const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery' ])
     
     console.log(distance)
@@ -130,7 +131,9 @@ const Homepage = () => {
                     </Slider>
                     <Map />
                     <Container centerContent m={3}>
-                       <Button size='lg' onClick={getRestaurants}>Go</Button>
+                        <Link to='/result'>
+                            <Button size='lg' onClick={getRestaurants}>Go</Button>
+                        </Link>
                        <Button size='lg' onClick={ getMore}>Go Again</Button>
                     </Container>
                 </Container>

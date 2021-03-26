@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-const session = require("express-session");
 
 module.exports = {
   register: async (req, res) => {
@@ -28,7 +27,7 @@ module.exports = {
 
     await req.session.save();
 
-    console.log(req.session.user);
+    // console.log(req.session.user);
 
     return res.status(200).json(req.session.user);
     // return res.status(200).send("good job");
@@ -51,7 +50,7 @@ module.exports = {
       };
     }
     await req.session.save();
-    console.log(req.session.user);
+    // console.log(req.session.user);
     return res.status(200).json(req.session.user);
   },
 

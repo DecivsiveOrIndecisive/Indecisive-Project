@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Culver's",
+    "opening_hours": {
+      "open_now": true
+    },
+    "photos": [
+      {
+        "height": 2268,
+        "width": 4032,
+        "photo_reference": "ATtYBwK3nWFirDhdU0PnLY0wo1SO30m3s8aZXANgC2UHhio0kfuKx5ylc_vTLK1eeCwB6CUfIasXrJyP6ywErCeEYXuaHsswtqU5T6LEe-uCTv2Z-NFA_Uumtt3ardmghaPbRXNVwJf_u6x6-kALMhZa3kC0uiatKfElpp0jux_avb5zv7Tc"
+      }
+    ],
+    "price_level": 1,
+    "rating": 3.4,
+    "vicinity": "1211 W 800 N, Orem",
+    "user_ratings_total": 2909,
+    "place_id": "ChIJjYTee9CETYcRkwnSzHk83IM"
+  },
+  {
+    "name": "Culver's",
+    "opening_hours": {
+      "open_now": true
+    },
+    "photos": [
+      {
+        "height": 2268,
+        "width": 4032,
+        "photo_reference": "ATtYBwK3nWFirDhdU0PnLY0wo1SO30m3s8aZXANgC2UHhio0kfuKx5ylc_vTLK1eeCwB6CUfIasXrJyP6ywErCeEYXuaHsswtqU5T6LEe-uCTv2Z-NFA_Uumtt3ardmghaPbRXNVwJf_u6x6-kALMhZa3kC0uiatKfElpp0jux_avb5zv7Tc"
+      }
+    ],
+    "price_level": 1,
+    "rating": 3.4,
+    "vicinity": "1211 W 800 N, Orem",
+    "user_ratings_total": 2909,
+    "place_id": "ChIJjYTee9CETYcRkwnSzHk83IM"
+  }
+]
