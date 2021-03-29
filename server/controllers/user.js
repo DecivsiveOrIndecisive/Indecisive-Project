@@ -27,10 +27,7 @@ module.exports = {
 
     await req.session.save();
 
-    // console.log(req.session.user);
-
     return res.status(200).json(req.session.user);
-    // return res.status(200).send("good job");
   },
 
   login: async (req, res) => {
@@ -50,7 +47,7 @@ module.exports = {
       };
     }
     await req.session.save();
-    // console.log(req.session.user);
+
     return res.status(200).json(req.session.user);
   },
 

@@ -7,22 +7,16 @@ import {
   SliderThumb,
   SliderFilledTrack,
   Button,
-  Box,
   Input,
-} from "@chakra-ui/react";
-import Map from "./Map/Map";
-import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { MapContext } from "../context/mapContext";
-import { Link } from "react-router-dom";
+} from "@chakra-ui/react"
+import Map from "./Map/Map"
+import React, { useEffect, useState, useContext } from "react"
+import { MapContext } from "../context/mapContext"
+import { Link } from "react-router-dom"
 
 const Homepage = () => {
     const {fetchLocation, keyword, getRandomKeyword, restaurants, getRestaurants, getMore, center, distance, setDistance, token, moreRestaurants}  = useContext(MapContext)
-    // const [distance, setDistance] = useState(8046.72)
-    // const [center, setCenter] = useState({ lat: 40, lng: -111 })
-    // const [keyword, setKeyword] = useState('')
-    // const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery' ])
-    
+
     console.log(distance)
     console.log(center)
     console.log(restaurants)
@@ -33,94 +27,7 @@ const Homepage = () => {
     useEffect(() => {
         fetchLocation()
         getRandomKeyword()
-        // console.log(center)
-        // console.log(restaurants)
-        // console.log(distance)
     }, [])
-
-    // const fetchLocation = () => {
-    //     navigator.geolocation.getCurrentPosition((position) => {
-    //         setCenter({
-    //             lat: position.coords.latitude,
-    //             lng: position.coords.longitude
-    //         })
-    //     }, _ => null)
-
-    // }
-    // const newRes = ['test4']
-
-    // const getRestaurants = async () => {
-    //     // console.log(center)
-    //     const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
-    //     setRestaurants(res.data.data)
-    //     setToken(res.data.token)
-        
-
-    //     // setTimeout(() => {
-    //     //     axios.get(`/api/moreRestaurants?token=${res.data.token}`)
-    //     //     .then(res => {
-    //     //         setMoreRestaurants(res.data)
-    //     //         console.log(res.data)
-    //     //     }
-    //     //         ).catch('weird error')
-    //     //     }, 5000)
-
-    //     // console.log(res)
-    //     console.log(token)
-    // }
-                
-    // const getRandomKeyword = function (arr) {
-    //     Setkeyword(arr[Math.floor((Math.random()*arr.length))]) ;
-    //   } 
-
-    // const getMore = async () => {
-    //     const res = await axios.get(`/api/moreRestaurants?token=${token}`)
-    //     setMoreRestaurants(res.data)
-    //     console.log(moreRestaurants)
-        
-    // }
-
-        // axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
-        // .then(res => {
-        //     setRestaurants(res.data.data)
-        //     setToken(res.data.token)
-        //     setTimeout(() => {
-        //         .then(res => {
-        //             // setRestaurants(restaurants.concat(res.data))
-        //             console.log(res.data)
-        //         }
-        //         ).catch('weird error')
-        //     }, 20000)
-        // }
-        
-        // )
-        
-        
-
-        // setCenter({lat: center.lat + Math.random(), lng: center.lng + Math.random() })
-        // axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&range=${distance}`)
-        // .then(res =>{
-        //     setRestaurants(restaurants.concat(res.data))
-
-        // })
-        
-        // const testArr = restaurants.concat(res.data)
-        
-       
-    
-    //   const mapRestaurants = restaurants.map((food) => {
-    //     return (
-    //       <div key={food.reference}>
-    //         <p>{food.name}</p>
-    //         <p>{food.vicinity}</p>
-    //         <p>{food.rating}</p>
-    //       </div>
-    //     );
-    //   });
-
-    // const filtered = restaurants.filter((place, i) => {
-
-    // })
 
     return (
         <section>
@@ -148,31 +55,7 @@ const Homepage = () => {
                     </Container>
                 </Container>
             </Flex>
-                                       
-            {/* {mapRestaurants} */}
-
-
-
-
         </section>
     )
 }
 export default Homepage
-
-
-// Perform a nearby search.
-// service.nearbySearch(
-//     { location: pyrmont, radius: 500, type: "store" },
-//     (results, status, pagination) => {
-//       if (status !== "OK" || !results) return;
-//       addPlaces(results, map);
-//       moreButton.disabled = !pagination || !pagination.hasNextPage;
-
-//       if (pagination && pagination.hasNextPage) {
-//         getNextPage = () => {
-//           // Note: nextPage will call the same handler function as the initial call
-//           pagination.nextPage();
-//         };
-//       }
-//     }
-//   );
