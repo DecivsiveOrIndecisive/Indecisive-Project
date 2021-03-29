@@ -9,13 +9,13 @@ import {
   Button,
   Flex,
   IconButton,
-} from "@chakra-ui/react";
-import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Logo } from "../Logo";
-import { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { Link as ReactLink } from "react-router-dom";
-import { UserContext } from "../context/userContext";
+} from "@chakra-ui/react"
+import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
+import { Logo } from "../Logo"
+import { useState, useContext, useEffect } from "react"
+import { useHistory } from "react-router-dom"
+import { Link as ReactLink } from "react-router-dom"
+import { UserContext } from "../context/userContext"
 
 const Login = () => {
   const userContext = useContext(UserContext);
@@ -27,16 +27,16 @@ const Login = () => {
   });
 
   useEffect(() => {
-    if (userContext.user) history.push("/");
-  }, [userContext.user]);
+    if (userContext.user) history.push("/")
+  }, [userContext.user])
 
-  const handleClick = () => setState({ ...state, show: !state.show });
+  const handleClick = () => setState({ ...state, show: !state.show })
 
   const handleChange = e => {
-    const value = e.target.value;
+    const value = e.target.value
     setState({
       ...state,
-      [e.target.name]: value,
+      [e.target.name]: value
     });
   };
 
@@ -136,4 +136,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login

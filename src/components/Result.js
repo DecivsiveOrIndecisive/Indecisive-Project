@@ -13,36 +13,35 @@ const Result = () => {
     token,
     getResult,
     result,
-  } = useContext(MapContext);
+  } = useContext(MapContext)
 
-  console.log(distance);
-  console.log(center);
-  console.log(restaurants);
-  console.log(keyword);
-  console.log(token);
-  // console.log(moreRestaurants)
-  console.log(result);
+  console.log(distance)
+  console.log(center)
+  console.log(restaurants)
+  console.log(keyword)
+  console.log(token)
+  console.log(result)
 
   useEffect(() => {
     if (restaurants.length > 0) {
-      getResult();
+      getResult()
     }
-  }, [restaurants]);
+  }, [restaurants])
 
   if (result) {
     return (
       <>
         <DisplayResult result={result} getResult={getResult} />
       </>
-    );
+    )
   } else {
-    console.log(result);
+    console.log(result)
     return (
       <Flex justify="center" align="center">
         <Loading />
       </Flex>
-    );
+    )
   }
-};
+}
 
-export default Result;
+export default Result
