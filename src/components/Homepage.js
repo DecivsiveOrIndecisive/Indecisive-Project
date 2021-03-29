@@ -114,7 +114,7 @@ const Homepage = () => {
     return (
         <section>
             <Flex justify='space-between' direction={['column', 'column', 'column', 'row']}>
-                <Heading as="h1" fontSize={[50, 100, 180, 250]} m={5}>Can't Decide?</Heading>
+                <Heading as="h1" fontSize={[50, 100, 180, 200]} m={5}>Can't Decide?</Heading>
                 <Container mr={['0px', '100px', '180px', `200px`]}>
                     <Container centerContent>
                         <Heading as='h3' size='lg'>Enter Your Location</Heading>
