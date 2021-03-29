@@ -21,29 +21,29 @@ const mapContainerStyle = {
 
 const options = {
   styles: mapStyleDark,
+  disableDefaultUI: true,
 };
 
 function Map() {
     const [center, setCenter] = useState({
-        lat: 40,
-        lng: -111
+        lat: 0,
+        lng: 0
     })
     // const [restaurants, setRestaurants] = useState([])
     // console.log(restaurants)
-    // useEffect(() => {
-    //     fetchLocation()
-    //     // getRestaurants()
-    // }, [])
+    useEffect(() => {
+        fetchLocation()        
+    }, [])
 
-    // const fetchLocation = () => {
-    //     navigator.geolocation.getCurrentPosition((position) => {
-    //         setCenter({
-    //             lat: position.coords.latitude,
-    //             lng: position.coords.longitude
-    //         })
-    //     }, _ => null)
+    const fetchLocation = () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            setCenter({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            })
+        }, _ => null)
         
-    // }
+    }
 
     // const getRestaurants = async () => {
     //     console.log(center.lat)
@@ -69,7 +69,7 @@ function Map() {
         <Flex>
                 <GoogleMap
                     mapContainerStyle={mapContainerStyle}
-                    zoom={14}
+                    zoom={13}
                     center={center}
                     options={options}
                     // onClick={onMapClick}
