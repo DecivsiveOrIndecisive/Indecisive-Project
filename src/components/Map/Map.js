@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -12,6 +12,8 @@ import usePlacesAutocomplete, {
 // import mapStyleLight from "./mapStyleLight";
 import mapStyleDark from "./mapStyleDark";
 import { Flex } from "@chakra-ui/react";
+import { MapContext } from "../../context/mapContext";
+
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -25,25 +27,31 @@ const options = {
 };
 
 function Map() {
-    const [center, setCenter] = useState({
-        lat: 0,
-        lng: 0
-    })
+  const {
+    // fetchLocation,
+    center,  
+  } = useContext(MapContext);  
+  
+  
+  // const [center, setCenter] = useState({
+    //     lat: 0,
+    //     lng: 0
+    // })
     // const [restaurants, setRestaurants] = useState([])
     // console.log(restaurants)
-    useEffect(() => {
-        fetchLocation()        
-    }, [])
+    // useEffect(() => {
+    //     fetchLocation()        
+    // }, [])
 
-    const fetchLocation = () => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setCenter({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            })
-        }, _ => null)
+    // const fetchLocation = () => {
+    //     navigator.geolocation.getCurrentPosition((position) => {
+    //         setCenter({
+    //             lat: position.coords.latitude,
+    //             lng: position.coords.longitude
+    //         })
+    //     }, _ => null)
         
-    }
+    // }
 
     // const getRestaurants = async () => {
     //     console.log(center.lat)
