@@ -134,7 +134,6 @@ const Homepage = () => {
                         <Link to='/result'>
                             <Button size='lg' onClick={getRestaurants}>Go</Button>
                         </Link>
-                       <Button size='lg' onClick={ getMore}>Go Again</Button>
                     </Container>
                 </Container>
             </Flex>

@@ -5,6 +5,7 @@ import Homepage from "./components/Homepage";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Result from "./components/Result";
+import History from "./components/History"
 
 export default (
   <Switch>
@@ -12,6 +13,7 @@ export default (
     <Route path="/login" component={Login} />
     <Route path="/register" component={Register} />
     <Route path="/result" component={Result} />
+    <Route path="/history" component={History} />
     <Route path="/favorites" component={Favorites} />
   </Switch>
 );
