@@ -1,34 +1,20 @@
-import places from "../temp/places.json";
-import { Box, Flex, Image, Badge, Heading, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Image,
+  Badge,
+  Heading,
+  Button,
+} from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { UserContext } from "../context/userContext";
 import axios from "axios";
 import { MapContext } from "../context/mapContext";
-import {
-  ImageProps,
-  keyframes,
-  usePrefersReducedMotion,
-} from "@chakra-ui/react";
 import DisplayResult from "./DisplayResult";
-import logo from "../logo.svg";
 import Loading from "./Loading";
-
-const spin = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`;
-
-function Example() {
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  const animation = prefersReducedMotion
-    ? undefined
-    : `${spin} infinite 5s linear`;
-
-  return <Image animation={animation} src={logo} />;
-}
 
 const Result = () => {
   const {

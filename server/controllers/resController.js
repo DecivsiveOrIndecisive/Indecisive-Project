@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { response } = require("express");
 const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
 
 module.exports = {
@@ -9,12 +10,19 @@ module.exports = {
       .get(
         `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${+lat},${+lng}&radius=${distance}&keyword=${keyword}&opennow&key=${REACT_APP_GOOGLE_MAPS_API_KEY}`
       )
-      .then(res => {
-        // console.log(res)
-        data = { data: res.data.results, token: res.data.next_page_token };
+      .then(response => {
+        console.log(response.data.results);
+        data = {
+          data: response.data.results,
+          token: response.data.next_page_token,
+        };
+
+        res.status(200).send(data);
       })
-      .catch(err => res.status(404).send("Error or maybe nothing open"));
-    res.status(200).send(data);
+      .catch(err => {
+        console.log(err);
+        res.status(500).send(err);
+      });
   },
 
   getMoreRestaurants: async (req, res) => {
@@ -25,11 +33,14 @@ module.exports = {
       .get(
         `https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${token}&key=${REACT_APP_GOOGLE_MAPS_API_KEY}`
       )
-      .then(res => {
-        console.log(res);
-        data = res.data.results;
+      .then(response => {
+        console.log(response);
+        data = response.data.results;
+        res.status(200).send(data);
       })
-      .catch(err => res.status(404).send("Error or maybe nothing open"));
-    res.status(200).send(data);
+      .catch(err => {
+        console.log(err);
+        res.status(500).send(err);
+      });
   },
 };

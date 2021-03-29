@@ -45,7 +45,89 @@ const Homepage = () => {
   useEffect(() => {
     fetchLocation();
     getRandomKeyword();
+    // console.log(center)
+    // console.log(restaurants)
+    // console.log(distance)
   }, []);
+
+  // const fetchLocation = () => {
+  //     navigator.geolocation.getCurrentPosition((position) => {
+  //         setCenter({
+  //             lat: position.coords.latitude,
+  //             lng: position.coords.longitude
+  //         })
+  //     }, _ => null)
+
+  // }
+  // const newRes = ['test4']
+
+  // const getRestaurants = async () => {
+  //     // console.log(center)
+  //     const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
+  //     setRestaurants(res.data.data)
+  //     setToken(res.data.token)
+
+  //     // setTimeout(() => {
+  //     //     axios.get(`/api/moreRestaurants?token=${res.data.token}`)
+  //     //     .then(res => {
+  //     //         setMoreRestaurants(res.data)
+  //     //         console.log(res.data)
+  //     //     }
+  //     //         ).catch('weird error')
+  //     //     }, 5000)
+
+  //     // console.log(res)
+  //     console.log(token)
+  // }
+
+  // const getRandomKeyword = function (arr) {
+  //     Setkeyword(arr[Math.floor((Math.random()*arr.length))]) ;
+  //   }
+
+  // const getMore = async () => {
+  //     const res = await axios.get(`/api/moreRestaurants?token=${token}`)
+  //     setMoreRestaurants(res.data)
+  //     console.log(moreRestaurants)
+
+  // }
+
+  // axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
+  // .then(res => {
+  //     setRestaurants(res.data.data)
+  //     setToken(res.data.token)
+  //     setTimeout(() => {
+  //         .then(res => {
+  //             // setRestaurants(restaurants.concat(res.data))
+  //             console.log(res.data)
+  //         }
+  //         ).catch('weird error')
+  //     }, 20000)
+  // }
+
+  // )
+
+  // setCenter({lat: center.lat + Math.random(), lng: center.lng + Math.random() })
+  // axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&range=${distance}`)
+  // .then(res =>{
+  //     setRestaurants(restaurants.concat(res.data))
+
+  // })
+
+  // const testArr = restaurants.concat(res.data)
+
+  //   const mapRestaurants = restaurants.map((food) => {
+  //     return (
+  //       <div key={food.reference}>
+  //         <p>{food.name}</p>
+  //         <p>{food.vicinity}</p>
+  //         <p>{food.rating}</p>
+  //       </div>
+  //     );
+  //   });
+
+  // const filtered = restaurants.filter((place, i) => {
+
+  // })
 
   return (
     <section>
@@ -82,7 +164,6 @@ const Homepage = () => {
             min={8046.72}
             max={32186.9}
             onChange={setDistance}
-            colorScheme="red"
           >
             <SliderTrack>
               <SliderFilledTrack />
@@ -92,11 +173,7 @@ const Homepage = () => {
           <Map />
           <Container centerContent m={3}>
             <Link to="/result">
-              <Button
-                size="lg"
-                onClick={() => getRestaurants()}
-                colorScheme="red"
-              >
+              <Button size="lg" onClick={getRestaurants}>
                 Go
               </Button>
             </Link>
