@@ -26,6 +26,9 @@ const Homepage = () => {
     setDistance,
     token,
     moreRestaurants,
+    zip,
+    setZip,
+    getCenterZip
   } = useContext(MapContext);
 
   console.log(distance);
@@ -63,7 +66,15 @@ const Homepage = () => {
             focusBorderColor="red.400"
             borderRadius="100px"
             m={2}
+            onChange={e => setZip(e.target.value)}
           />
+          <Container centerContent m={3}>
+            {/* <Input variant="flushed" placeholder="enter zip" onChange={e => setZip(e.target.value)}/> */}
+            {console.log(zip)}
+            <Button size="lg" onClick={getCenterZip} colorScheme="red">
+                Get Coor
+              </Button>
+          </Container>
           <Container centerContent>
             <Heading as="h4" size="m">
               Range
@@ -90,6 +101,13 @@ const Homepage = () => {
               </Button>
             </Link>
           </Container>
+          {/* <Container centerContent m={3}>
+            <Input variant="flushed" placeholder="enter zip" onChange={e => setZip(e.target.value)}/>
+            {console.log(zip)}
+            <Button size="lg" onClick={getCenterZip} colorScheme="red">
+                Get Coor
+              </Button>
+          </Container> */}
         </Container>
       </Flex>
     </section>

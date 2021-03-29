@@ -5,16 +5,17 @@ import axios from 'axios'
 
 export const MapContext = createContext()
 export const MapProvider = (props => {
-    
+
     const [distance, setDistance] = useState(8046.72)
     const [center, setCenter] = useState({ lat: 40, lng: -111 })
     const [keyword, setKeyword] = useState('')
-    const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery' ])
+    const [list, setList] = useState(['restaurant', 'food', 'diner', 'eat', 'cafe', 'eatery'])
     const [restaurants, setRestaurants] = useState([])
     const [token, setToken] = useState('')
     const [moreRestaurants, setMoreRestaurants] = useState([])
     const [result, setResult] = useState(null)
-    
+    const [zip, setZip] = useState('84111')
+
     const fetchLocation = () => {
         navigator.geolocation.getCurrentPosition((position) => {
             setCenter({
@@ -26,12 +27,12 @@ export const MapProvider = (props => {
     }
 
     const getRandomKeyword = function () {
-        setKeyword(list[Math.floor((Math.random()*list.length))]) ;
-      } 
-    
-      const getResult = function () {
-        setResult(restaurants[Math.floor((Math.random()*restaurants.length))]);
-      } 
+        setKeyword(list[Math.floor((Math.random() * list.length))]);
+    }
+
+    const getResult = function () {
+        setResult(restaurants[Math.floor((Math.random() * restaurants.length))]);
+    }
 
     const getRestaurants = async () => {
         const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
@@ -39,7 +40,8 @@ export const MapProvider = (props => {
         setRestaurants(res.data.data)
         setToken(res.data.token)
 
-        
+
+
         ////////////// TEST LATER///////////////////
         // setTimeout(() => {
         //     axios.get(`/api/moreRestaurants?token=${res.data.token}`)
@@ -55,11 +57,36 @@ export const MapProvider = (props => {
         const res = await axios.get(`/api/moreRestaurants?token=${token}`)
         setMoreRestaurants(res.data)
         console.log(moreRestaurants)
-        
+
+    }
+
+    const getCenterZip = async () => {
+        const res = await axios.get(`/api/centerZip?zip=${zip}`)
+        setCenter({ lat: res.data.geometry.location.lat, lng: res.data.geometry.location.lng })
+        // console.log(center)
     }
 
     return (
-        <MapContext.Provider value={{fetchLocation, keyword, getRandomKeyword, getRandomKeyword, restaurants, getRestaurants, getMore, center, distance, setDistance, token, moreRestaurants, getResult, result}}>
+        <MapContext.Provider
+            value={{
+                fetchLocation,
+                keyword,
+                getRandomKeyword,
+                getRandomKeyword,
+                restaurants,
+                getRestaurants,
+                getMore,
+                center,
+                distance,
+                setDistance,
+                token,
+                moreRestaurants,
+                getResult,
+                result,
+                zip,
+                setZip,
+                getCenterZip
+            }}>
             {props.children}
         </MapContext.Provider>
     )

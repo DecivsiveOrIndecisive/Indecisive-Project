@@ -36,7 +36,7 @@ massive({
   //Restautant Endpoint!!!///////////
 app.get('/api/restaurants', restaurantCtrl.getRestaurants)
 app.get('/api/moreRestaurants', restaurantCtrl.getMoreRestaurants)
-
+app.get('/api/centerZip', restaurantCtrl.getCenterZip )
 
 //Auth Endpoints
 app.post("/api/auth/register", userCtrl.register);
