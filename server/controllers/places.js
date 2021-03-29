@@ -17,6 +17,24 @@ module.exports = {
     return res.status(200).send("place saved");
   },
 
+  blacklist: async (req, res) => {
+    const db = req.app.get("db");
+    const { result, user } = req.body;
+    const { place_id } = result;
+
+    // console.log(user.id);
+
+    const newBL = await db.blacklist.insert({
+      place_key: place_id,
+      place_details: result,
+      bl_user: user.id,
+    });
+
+    console.log(newBL);
+
+    return res.status(200).send("place blacklisted");
+  },
+
   getSaved: async (req, res) => {
     const db = req.app.get("db");
     // console.log(req.query);
@@ -29,6 +47,18 @@ module.exports = {
     return res.status(200).send(favorites);
   },
 
+  getBlacklist: async (req, res) => {
+    const db = req.app.get("db");
+    // console.log(req.query);
+    const { user_id } = req.query;
+
+    const blacklist = await db.blacklist.where(`bl_user = ${user_id}`);
+
+    console.log(blacklist);
+
+    return res.status(200).send(blacklist);
+  },
+
   deleteSaved: async (req, res) => {
     const db = req.app.get("db");
 
@@ -39,5 +69,16 @@ module.exports = {
     // console.log(req.body);
 
     return res.status(200).send("removed from favorites");
+  },
+  whitelist: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { place_key, user_id } = req.body;
+
+    await db.blacklist.destroy({ place_key: place_key, bl_user: user_id });
+
+    // console.log(req.body);
+
+    return res.status(200).send("removed from blacklist");
   },
 };

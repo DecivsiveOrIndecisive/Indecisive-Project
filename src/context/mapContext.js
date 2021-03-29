@@ -14,7 +14,6 @@ export const MapProvider = (props => {
     const [token, setToken] = useState('')
     const [moreRestaurants, setMoreRestaurants] = useState([])
     const [result, setResult] = useState(null)
-   
     
     const fetchLocation = () => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -64,5 +63,4 @@ export const MapProvider = (props => {
             {props.children}
         </MapContext.Provider>
     )
-
 })
