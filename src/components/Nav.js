@@ -4,17 +4,17 @@ import {
   IconButton,
   Text,
   Link as ChakraLink,
-} from "@chakra-ui/react";
-import { Icon } from "@chakra-ui/react";
-import { ColorModeSwitcher } from "./ColorModeSwitcher";
-import { Logo } from "../Logo";
-import { Link } from "react-router-dom";
-import { UserContext } from "../context/userContext";
-import { useContext } from "react";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
+} from "@chakra-ui/react"
+import { Icon } from "@chakra-ui/react"
+import { ColorModeSwitcher } from "./ColorModeSwitcher"
+import { Logo } from "../Logo"
+import { Link } from "react-router-dom"
+import { UserContext } from "../context/userContext"
+import { useContext } from "react"
+import { ExternalLinkIcon } from "@chakra-ui/icons"
 
 const Nav = () => {
-  const userContext = useContext(UserContext);
+  const userContext = useContext(UserContext)
   return (
     <header>
       <Flex align="center">
@@ -75,4 +75,4 @@ const Nav = () => {
     </header>
   );
 };
-export default Nav;
+export default Nav

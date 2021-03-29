@@ -14,7 +14,6 @@ export const MapProvider = (props => {
     const [token, setToken] = useState('')
     const [moreRestaurants, setMoreRestaurants] = useState([])
     const [result, setResult] = useState(null)
-   
     
     const fetchLocation = () => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -35,7 +34,7 @@ export const MapProvider = (props => {
       } 
 
     const getRestaurants = async () => {
-        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${50000}&keyword=${keyword}`)
+        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
         console.log(res.data)
         setRestaurants(res.data.data)
         setToken(res.data.token)
@@ -64,5 +63,4 @@ export const MapProvider = (props => {
             {props.children}
         </MapContext.Provider>
     )
-
 })
