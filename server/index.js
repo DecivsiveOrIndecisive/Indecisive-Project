@@ -46,5 +46,8 @@ app.get("/api/auth/user", userCtrl.getUser);
 
 //* Place endpoints
 app.post("/api/posts/save", placeCtrl.savePlace);
+app.post("/api/posts/blacklist", placeCtrl.blacklist);
 app.get("/api/posts/getSaved", placeCtrl.getSaved);
+app.get("/api/posts/getBlacklist", placeCtrl.getBlacklist);
 app.delete("/api/post/deleteSaved", placeCtrl.deleteSaved);
+app.delete("/api/post/whitelist", placeCtrl.whitelist);

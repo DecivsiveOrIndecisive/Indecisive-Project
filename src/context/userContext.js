@@ -62,6 +62,15 @@ export const UserProvider = withRouter(props => {
       .catch(err => console.log(err));
   };
 
+  const blacklistPlace = async result => {
+    await axios
+      .post("/api/posts/blacklist", { result, user })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+  };
+
   const getFavorite = async () => {
     await axios
       .get("/api/posts/getSaved", { params: { user_id: user.id } })
@@ -71,9 +80,28 @@ export const UserProvider = withRouter(props => {
       .catch(err => console.log(err));
   };
 
+  const getBlacklist = async () => {
+    await axios
+      .get("/api/posts/getBlacklist", { params: { user_id: user.id } })
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => console.log(err));
+  };
+
   return (
     <UserContext.Provider
-      value={{ user, setUser, register, login, logout, savePlace, getFavorite }}
+      value={{
+        user,
+        setUser,
+        register,
+        login,
+        logout,
+        savePlace,
+        blacklistPlace,
+        getFavorite,
+        getBlacklist,
+      }}
     >
       {props.children}
     </UserContext.Provider>

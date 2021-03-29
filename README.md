@@ -12,8 +12,17 @@ CREATE TABLE users (
 ```sql
 CREATE TABLE favorites (
     fav_id SERIAL PRIMARY KEY,
-    place_key TEXT
+    place_key TEXT,
     place_details JSON NOT NULL,
     fav_user INT REFERENCES users(user_id)
+)
+```
+
+```sql
+CREATE TABLE blacklist (
+    bl_id SERIAL PRIMARY KEY,
+    place_key TEXT,
+    place_details JSON NOT NULL,
+    bl_user INT REFERENCES users(user_id)
 )
 ```
