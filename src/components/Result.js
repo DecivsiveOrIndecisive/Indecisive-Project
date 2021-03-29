@@ -1,8 +1,8 @@
-import { Flex } from "@chakra-ui/react"
-import { useContext, useEffect } from "react"
-import { MapContext } from "../context/mapContext"
-import DisplayResult from "./DisplayResult"
-import Loading from "./Loading"
+import { Flex } from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
+import { MapContext } from "../context/mapContext";
+import DisplayResult from "./DisplayResult";
+import Loading from "./Loading";
 
 const Result = () => {
   const {
