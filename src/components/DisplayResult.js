@@ -1,22 +1,8 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Image,
-  Badge,
-  Heading,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Flex, Image, Badge, Heading, Button } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/userContext";
 import axios from "axios";
-import { MapContext } from "../context/mapContext";
-import {
-  ImageProps,
-  keyframes,
-  usePrefersReducedMotion,
-} from "@chakra-ui/react";
 
 const DisplayResult = ({ result, getResult }) => {
   const userContext = useContext(UserContext);
@@ -26,7 +12,7 @@ const DisplayResult = ({ result, getResult }) => {
   // const [result] = places;
   const calculatePrice = () => {
     let arr = [];
-    for (let i = 0; i < result.price_level; i++) {
+    for (let i = 0; i < Math.round(result.price_level); i++) {
       arr.push("$");
     }
     // console.log(arr);
