@@ -1,34 +1,16 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Image,
-  Badge,
-  Heading,
-  Button,
-} from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
-import { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router";
-import { UserContext } from "../context/userContext";
-import axios from "axios";
+import { Flex } from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
 import { MapContext } from "../context/mapContext";
 import DisplayResult from "./DisplayResult";
 import Loading from "./Loading";
 
 const Result = () => {
   const {
-    fetchLocation,
     keyword,
-    getRandomKeyword,
     restaurants,
-    getRestaurants,
-    getMore,
     center,
     distance,
-    setDistance,
     token,
-    moreRestaurants,
     getResult,
     result,
   } = useContext(MapContext);
