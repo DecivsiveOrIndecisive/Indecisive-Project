@@ -34,7 +34,7 @@ export const MapProvider = (props => {
       } 
 
     const getRestaurants = async () => {
-        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${50000}&keyword=${keyword}`)
+        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
         console.log(res.data)
         setRestaurants(res.data.data)
         setToken(res.data.token)
