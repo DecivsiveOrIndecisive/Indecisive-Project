@@ -1,9 +1,20 @@
-import { Heading, Container, Flex, Slider, SliderTrack, SliderThumb, SliderFilledTrack, Button, Box, Input } from '@chakra-ui/react'
-import Map from './Map/Map'
-import React, { useEffect, useState, useContext } from 'react'
-import axios from 'axios'
-import { MapContext } from '../context/mapContext'
-import {Link} from 'react-router-dom'
+import {
+  Heading,
+  Container,
+  Flex,
+  Slider,
+  SliderTrack,
+  SliderThumb,
+  SliderFilledTrack,
+  Button,
+  Box,
+  Input,
+} from "@chakra-ui/react";
+import Map from "./Map/Map";
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
+import { MapContext } from "../context/mapContext";
+import { Link } from "react-router-dom";
 
 const Homepage = () => {
     const {fetchLocation, keyword, getRandomKeyword, restaurants, getRestaurants, getMore, center, distance, setDistance, token, moreRestaurants}  = useContext(MapContext)
