@@ -62,8 +62,8 @@ const History = () => {
     <section>
       <Flex
         justify="space-evenly"
-        align="center"
-        direction="row"
+        align="left"
+        direction="column"
         wrap="wrap"
         mt={10}
       >
@@ -74,4 +74,5 @@ const History = () => {
     </section>
   );
 };
+
 export default History;
