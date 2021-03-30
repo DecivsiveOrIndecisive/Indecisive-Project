@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { Switch, Route } from "react-router-dom";
-import Favorites from "./components/Favorites";
+import Favorites from "./components/UserInfo";
 import Homepage from "./components/Homepage";
 import Login from "./components/Login";
 import Register from "./components/Register";

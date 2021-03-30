@@ -8,6 +8,7 @@ import {
   SliderFilledTrack,
   Button,
   Input,
+  Text,
 } from "@chakra-ui/react";
 import Map from "./Map/Map";
 import React, { useEffect, useContext } from "react";
@@ -85,6 +86,7 @@ const Homepage = () => {
             defaultValue={8046.72}
             min={8046.72}
             max={32186.9}
+            step={8046.72}
             onChange={setDistance}
             colorScheme="red"
           >
@@ -93,6 +95,7 @@ const Homepage = () => {
             </SliderTrack>
             <SliderThumb />
           </Slider>
+          <Text>search radius: {Math.round(distance / 1609)} miles</Text>
           <Map />
           <Container centerContent m={3}>
             <Link to="/result">
