@@ -89,8 +89,9 @@ const UserInfo = () => {
 
   useEffect(() => {
     if (userContext.user) {
-      //getPlaces();
+      getPlaces();
       getBlacklist();
+      getHistory();
     } else {
       history.push("/");
     }
