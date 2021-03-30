@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -12,6 +12,8 @@ import usePlacesAutocomplete, {
 // import mapStyleLight from "./mapStyleLight";
 import mapStyleDark from "./mapStyleDark";
 import { Flex } from "@chakra-ui/react";
+import { MapContext } from "../../context/mapContext";
+
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -21,18 +23,24 @@ const mapContainerStyle = {
 
 const options = {
   styles: mapStyleDark,
+  disableDefaultUI: true,
 };
 
 function Map() {
-    const [center, setCenter] = useState({
-        lat: 40,
-        lng: -111
-    })
+  const {
+    // fetchLocation,
+    center,  
+  } = useContext(MapContext);  
+  
+  
+  // const [center, setCenter] = useState({
+    //     lat: 0,
+    //     lng: 0
+    // })
     // const [restaurants, setRestaurants] = useState([])
     // console.log(restaurants)
     // useEffect(() => {
-    //     fetchLocation()
-    //     // getRestaurants()
+    //     fetchLocation()        
     // }, [])
 
     // const fetchLocation = () => {
@@ -69,7 +77,7 @@ function Map() {
         <Flex>
                 <GoogleMap
                     mapContainerStyle={mapContainerStyle}
-                    zoom={14}
+                    zoom={13}
                     center={center}
                     options={options}
                     // onClick={onMapClick}
