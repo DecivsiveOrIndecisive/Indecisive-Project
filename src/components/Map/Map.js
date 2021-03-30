@@ -28,8 +28,20 @@ const options = {
 
 function Map() {
   const {
-    // fetchLocation,
-    center,  
+    fetchLocation,
+    keyword,
+    getRandomKeyword,
+    restaurants,
+    getRestaurants,
+    center,
+    distance,
+    setDistance,
+    token,
+    moreRestaurants,
+    zip,
+    setZip,
+    getCenterZip
+    
   } = useContext(MapContext);  
   
   
@@ -70,7 +82,12 @@ function Map() {
     if (!isLoaded) return 'Loading maps!'
 
     
-
+   const mappedRestaurants = restaurants.map((food, i) => (
+      <Marker
+          key={i}          
+          position={{lat: food.geometry.location.lat, lng: food.geometry.location.lng}}
+      />
+  ))
 
 
     return(
@@ -84,7 +101,7 @@ function Map() {
                     // onLoad={onMapLoad}
 
                 >
-
+                  {mappedRestaurants}
                     {/* {restaurants.map((food, i) => (
                         <Marker
                             key={i}
