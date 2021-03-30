@@ -15,6 +15,7 @@ module.exports = {
       email,
       username: name,
       password: hash,
+      history: null,
     });
 
     console.log(result);
@@ -62,5 +63,30 @@ module.exports = {
     } else {
       return res.sendStatus(404);
     }
+  },
+
+  saveUserHistory: async (req, res) => {
+    const db = req.app.get("db");
+    // console.log(req.body);
+    const { result, user } = req.body;
+
+    let [dbUser] = await db.users.where(`user_id = ${user.id}`);
+
+    if (!dbUser.history) {
+      let newHistory = {
+        arr: [result],
+      };
+      console.log(newHistory);
+      await db.users.update({ user_id: user.id }, { history: newHistory });
+    } else if (dbUser.history.length < 15) {
+      dbUser.history.arr.push(result);
+      await db.users.update({ user_id: user.id }, { history: dbUser.history });
+    } else if (dbUser.history.length >= 15) {
+      dbUser.history.arr.shift();
+      dbUser.history.arr.push(result);
+      await db.users.update({ user_id: user.id }, { history: dbUser.history });
+    }
+
+    res.sendStatus(200);
   },
 };

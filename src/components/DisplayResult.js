@@ -53,7 +53,7 @@ const DisplayResult = ({ result, getResult }) => {
 
   useEffect(() => {
     getPlaces();
-  }, []);
+  }, [getResult]);
 
   return (
     <Flex align="center" justify="center" direction="column">
