@@ -43,8 +43,11 @@ const Result = () => {
     }
   };
 
-  if (result) {
+  useEffect(() => {
     saveHistory();
+  }, [result]);
+
+  if (result) {
     return (
       <>
         <DisplayResult result={result} getResult={getResult} />
