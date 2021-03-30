@@ -62,11 +62,12 @@ export const UserProvider = withRouter(props => {
       .catch(err => console.log(err));
   };
 
-  const blacklistPlace = async result => {
+  const blacklistPlace = async (result, getResult) => {
     await axios
       .post("/api/posts/blacklist", { result, user })
       .then(res => {
         console.log(res);
+        getResult();
       })
       .catch(err => console.log(err));
   };
