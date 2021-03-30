@@ -93,4 +93,18 @@ module.exports = {
 
     res.sendStatus(200);
   },
+
+  getHistory: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { user_id } = req.query;
+
+    const [user] = await db.users.where(`user_id = ${user_id}`);
+
+    console.log(user.history);
+    const { history } = user;
+    console.log(history);
+
+    return res.status(200).send(user.history.arr);
+  },
 };
