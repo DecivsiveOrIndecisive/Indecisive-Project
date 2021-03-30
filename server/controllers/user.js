@@ -15,6 +15,7 @@ module.exports = {
       email,
       username: name,
       password: hash,
+      history: null,
     });
 
     console.log(result);
@@ -62,5 +63,48 @@ module.exports = {
     } else {
       return res.sendStatus(404);
     }
+  },
+
+  saveUserHistory: async (req, res) => {
+    const db = req.app.get("db");
+    // console.log(req.body);
+    const { result, user } = req.body;
+
+    let [dbUser] = await db.users.where(`user_id = ${user.id}`);
+    console.log(dbUser);
+
+    if (!dbUser.history) {
+      console.log("variant 1");
+      let newHistory = {
+        arr: [result],
+      };
+      console.log(newHistory);
+      await db.users.update({ user_id: user.id }, { history: newHistory });
+    } else if (dbUser.history.arr.length < 15) {
+      console.log("variant 2");
+      dbUser.history.arr.push(result);
+      await db.users.update({ user_id: user.id }, { history: dbUser.history });
+    } else if (dbUser.history.arr.length >= 15) {
+      console.log("variant 3");
+      dbUser.history.arr.shift();
+      dbUser.history.arr.push(result);
+      await db.users.update({ user_id: user.id }, { history: dbUser.history });
+    } else console.log("nothing is working!");
+
+    res.sendStatus(200);
+  },
+
+  getHistory: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { user_id } = req.query;
+
+    const [user] = await db.users.where(`user_id = ${user_id}`);
+
+    console.log(user.history);
+    const { history } = user;
+    console.log(history);
+
+    return res.status(200).send(user.history.arr);
   },
 };

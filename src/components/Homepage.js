@@ -9,8 +9,10 @@ import {
   Button,
   Input,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import Map from "./Map/Map";
+import MapLight from "./Map/MapLight";
 import React, { useEffect, useContext } from "react";
 import { MapContext } from "../context/mapContext";
 import { Link } from "react-router-dom";
@@ -28,6 +30,7 @@ const Homepage = () => {
     token,
     moreRestaurants,
   } = useContext(MapContext);
+  const { colorMode } = useColorMode();
 
   console.log(distance);
   console.log(center);
@@ -85,7 +88,8 @@ const Homepage = () => {
             <SliderThumb />
           </Slider>
           <Text>search radius: {Math.round(distance / 1609)} miles</Text>
-          <Map />
+          {colorMode === "dark" ? <Map /> : <MapLight />}
+
           <Container centerContent m={3}>
             <Link to="/result">
               <Button size="lg" onClick={getRestaurants} colorScheme="red">
