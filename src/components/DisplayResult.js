@@ -21,7 +21,6 @@ const DisplayResult = ({ result, getResult }) => {
   const price = calculatePrice();
 
   const savePlace = () => {
-    alert(userContext.user);
     setState({ ...state, isSaved: true });
     userContext.savePlace(result);
   };
@@ -107,7 +106,7 @@ const DisplayResult = ({ result, getResult }) => {
           </Box>
         </Box>
         {userContext.user ? (
-          <Flex justify="center" my={4}>
+          <Flex justify="space-evenly" my={4}>
             <Button
               colorScheme="red"
               onClick={() => savePlace()}
@@ -115,6 +114,16 @@ const DisplayResult = ({ result, getResult }) => {
             >
               {!state.isSaved ? "Add to Favorites" : "Added to Favorites!"}
             </Button>
+            {state.isSaved ? (
+              ""
+            ) : (
+              <Button
+                colorScheme="red"
+                onClick={() => userContext.blacklistPlace(result, getResult)}
+              >
+                Don't show again
+              </Button>
+            )}
           </Flex>
         ) : (
           ""

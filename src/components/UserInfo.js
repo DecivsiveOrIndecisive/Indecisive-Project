@@ -1,17 +1,11 @@
-import {
-  TabList,
-  TabPanels,
-  Tabs,
-  Tab,
-  TabPanel,
-} from "@chakra-ui/react";
-import History from './History'
-import Blacklist from './Blacklist'
-import Favorites from './Favorites'
+import { TabList, TabPanels, Tabs, Tab, TabPanel } from "@chakra-ui/react";
+import History from "./History";
+import Blacklist from "./Blacklist";
+import Favorites from "./Favorites";
 
 const UserInfo = () => {
   return (
-    <Tabs>
+    <Tabs colorScheme="red">
       <TabList>
         <Tab>Favorites</Tab>
         <Tab>Blacklist</Tab>
@@ -22,10 +16,10 @@ const UserInfo = () => {
           <Favorites />
         </TabPanel>
         <TabPanel>
-          <Blacklist /> 
+          <Blacklist />
         </TabPanel>
         <TabPanel>
-            <History />
+          <History />
         </TabPanel>
       </TabPanels>
     </Tabs>
