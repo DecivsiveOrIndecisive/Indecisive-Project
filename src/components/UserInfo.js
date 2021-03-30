@@ -13,12 +13,15 @@ import {
 import axios from "axios";
 import DisplayPlace from "./DisplayPlace";
 //import History from './History'
+//import Blacklist from './Blacklist'
+//import Favorites from './Favorites'
 
 const UserInfo = () => {
   let history = useHistory();
   const [state, setState] = useState({
     places: [],
     blacklist: [],
+    history: [],
   });
   const userContext = useContext(UserContext);
 
@@ -41,6 +44,19 @@ const UserInfo = () => {
       })
       .then(res => {
         setState({ ...state, blacklist: res.data });
+
+        console.log(res.data);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const getHistory = async () => {
+    await axios
+      .get("/api/posts/getHistory", {
+        params: { user_id: userContext.user.id },
+      })
+      .then(res => {
+        setState({ ...state, history: res.data });
 
         console.log(res.data);
       })
@@ -73,7 +89,7 @@ const UserInfo = () => {
 
   useEffect(() => {
     if (userContext.user) {
-      getPlaces();
+      //getPlaces();
       getBlacklist();
     } else {
       history.push("/");
@@ -105,6 +121,19 @@ const UserInfo = () => {
       </div>
     );
   });
+
+  const mappedHistory = state.history.map((e, i) => {
+             return (
+                <div key={i}>
+                  <DisplayPlace
+                    place={e}
+                    user={userContext.user}
+                    removeFavorite={whitelist}
+                     typeOf="blacklist"
+                  />
+                </div>
+             )
+         })
   console.log(state);
   return (
     <Tabs>
@@ -126,7 +155,7 @@ const UserInfo = () => {
             {state.places.length !== 0
               ? mappedPlaces
               : "You do not have any saved places yet!"}
-          </Flex>
+        </Flex>
         </TabPanel>
         <TabPanel>
           <Flex
@@ -142,8 +171,17 @@ const UserInfo = () => {
           </Flex>
         </TabPanel>
         <TabPanel>
-              <Text>Why Hello there</Text>
-          {/* <History /> */}
+        <Flex
+            justify="space-evenly"
+            align="center"
+            direction="row"
+            wrap="wrap"
+            mt={10}
+          >
+            {state.history.length !== 0
+              ? mappedHistory
+              : "You don't have a history! Start deciding now!"}
+          </Flex>
         </TabPanel>
       </TabPanels>
     </Tabs>

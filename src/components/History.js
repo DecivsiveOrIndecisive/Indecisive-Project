@@ -12,7 +12,7 @@
 //   } from "@chakra-ui/react";
 
 // const History = () => {
-//     const mappedPlaces = places.map((e, index) => {
+//     const mappedPlaces = props.history.map((e, index) => {
 //         return <Place key={index} name={e.name} alt={e.name} rating={e.rating} priceLvl={e.price_level} vincinity={e.vicinity} userRating={e.user_ratings_total} />
 //     })
 
