@@ -46,11 +46,11 @@ module.exports = {
 
   getCenterZip: async (req, res) => {
     const { zip } = req.query
-    console.log(zip)
+    // console.log(zip)
     let data = []
     await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip}&key=${REACT_APP_GOOGLE_MAPS_API_KEY}`)
         .then(response => {
-            console.log(response);
+            // console.log(response);
             data = response.data.results[0]
             // data = response.data.results;
             res.status(200).send(data);

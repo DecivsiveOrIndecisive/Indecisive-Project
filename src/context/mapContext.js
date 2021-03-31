@@ -1,11 +1,13 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useContext } from "react"
 import { useHistory, useLocation, withRouter } from "react-router"
 import axios from 'axios'
+import { UserContext } from "./userContext";
+
 
 
 export const MapContext = createContext()
 export const MapProvider = (props => {
-
+    
     const [distance, setDistance] = useState(8046.72)
     const [center, setCenter] = useState({ lat: 40, lng: -111 })
     const [keyword, setKeyword] = useState('')
@@ -15,6 +17,8 @@ export const MapProvider = (props => {
     const [moreRestaurants, setMoreRestaurants] = useState([])
     const [result, setResult] = useState(null)
     const [zip, setZip] = useState('84111')
+    
+    const {favPlaces} = useContext(UserContext)
 
     const fetchLocation = () => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -35,9 +39,20 @@ export const MapProvider = (props => {
     }
 
     const getRestaurants = async () => {
+        const favPlaceDetails = []
+        console.log(favPlaceDetails)
+            favPlaces.forEach(place => {
+                favPlaceDetails.push(place.place_details)
+            })
+        
         const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&keyword=${keyword}`)
-        console.log(res.data)
-        setRestaurants(res.data.data)
+        const restaurantResult = (res.data.data)
+        // console.log(restaurantResult)
+        
+        const finalResult = restaurantResult.concat(favPlaceDetails)
+        // console.log(favPlaces)
+        
+        setRestaurants(finalResult)
         setToken(res.data.token)
 
 

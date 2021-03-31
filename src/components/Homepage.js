@@ -14,6 +14,7 @@ import Map from "./Map/Map";
 import React, { useEffect, useContext } from "react";
 import { MapContext } from "../context/mapContext";
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/userContext";
 
 const Homepage = () => {
   const {
@@ -31,6 +32,7 @@ const Homepage = () => {
     setZip,
     getCenterZip
   } = useContext(MapContext);
+  const {favPlaces, user, getFavPlaces} = useContext(UserContext)
 
   console.log(distance);
   console.log(center);
@@ -38,10 +40,15 @@ const Homepage = () => {
   console.log(keyword);
   console.log(token);
   console.log(moreRestaurants);
+  console.log(favPlaces);
+  
 
   useEffect(() => {
     fetchLocation();
     getRandomKeyword();
+    if(user !== null){
+      getFavPlaces()
+    }
   }, []);
 
   return (
