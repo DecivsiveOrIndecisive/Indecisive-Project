@@ -92,7 +92,11 @@ const Homepage = () => {
 
           <Container centerContent m={3}>
             <Link to="/result">
-              <Button size="lg" onClick={getRestaurants} colorScheme="red">
+              <Button
+                size="lg"
+                onClick={() => getRestaurants()}
+                colorScheme="red"
+              >
                 Go
               </Button>
             </Link>
