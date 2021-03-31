@@ -1,6 +1,6 @@
-import {Box, Container, Flex, Heading, Image, Button, Spacer, IconButton} from '@chakra-ui/react'
-import {NotAllowedIcon, StarIcon} from '@chakra-ui/icons'
-import {createContext, useContext} from 'react'
+import { Box, Flex, Heading, Spacer, IconButton }  from '@chakra-ui/react'
+import { NotAllowedIcon, StarIcon } from '@chakra-ui/icons'
+import { useContext } from 'react'
 import { UserContext } from '../context/userContext'
 
 const Place = props => {
@@ -32,8 +32,8 @@ const Place = props => {
                     </Flex>
                     <Spacer />
                     <Box>
-                        <IconButton aria-label="Favorite" icon={<StarIcon />} size={'lg'} onClick={() => savePlace} m={1} />
-                        <IconButton aria-label="Blacklist" icon={<NotAllowedIcon />} size={'lg'} onClick={() => blacklistPlace} m={1}/>
+                        <IconButton aria-label="Favorite" icon={<StarIcon />} size={'lg'} onClick={() => savePlace()} m={1} />
+                        <IconButton aria-label="Blacklist" icon={<NotAllowedIcon />} size={'lg'} onClick={() => blacklistPlace()} m={1}/>
                     </Box>
                 </Flex>
             </Box>
