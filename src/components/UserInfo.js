@@ -10,6 +10,7 @@ const UserInfo = () => {
         <Tab>Favorites</Tab>
         <Tab>Blacklist</Tab>
         <Tab>History</Tab>
+        <Tab>Map</Tab>
       </TabList>
       <TabPanels>
         <TabPanel>
@@ -21,6 +22,7 @@ const UserInfo = () => {
         <TabPanel>
           <History />
         </TabPanel>
+        <TabPanel>PUT YOUR COOL MAP HERE</TabPanel>
       </TabPanels>
     </Tabs>
   );
