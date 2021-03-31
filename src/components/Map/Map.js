@@ -13,6 +13,7 @@ import usePlacesAutocomplete, {
 import mapStyleDark from "./mapStyleDark";
 import { Flex } from "@chakra-ui/react";
 import { MapContext } from "../../context/mapContext";
+import {withRouter} from 'react-router-dom'
 
 
 const libraries = ["places"];
@@ -26,7 +27,7 @@ const options = {
   disableDefaultUI: true,
 };
 
-function Map() {
+function Map(props) {
   const {
     fetchLocation,
     keyword,
@@ -81,6 +82,7 @@ function Map() {
     if (loadError) return 'Error loading maps!'
     if (!isLoaded) return 'Loading maps!'
 
+    console.log(props)
     
    const mappedRestaurants = restaurants.map((food, i) => (
       <Marker
@@ -117,4 +119,4 @@ function Map() {
     )
 }
 
-export default Map;
+export default withRouter(Map);
