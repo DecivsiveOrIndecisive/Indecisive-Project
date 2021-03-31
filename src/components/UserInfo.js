@@ -5,11 +5,12 @@ import Favorites from "./Favorites";
 
 const UserInfo = () => {
   return (
-    <Tabs colorScheme="red">
+    <Tabs colorScheme="brand">
       <TabList>
         <Tab>Favorites</Tab>
         <Tab>Blacklist</Tab>
         <Tab>History</Tab>
+        <Tab>Map</Tab>
       </TabList>
       <TabPanels>
         <TabPanel>
@@ -21,6 +22,7 @@ const UserInfo = () => {
         <TabPanel>
           <History />
         </TabPanel>
+        <TabPanel>PUT YOUR COOL MAP HERE</TabPanel>
       </TabPanels>
     </Tabs>
   );

@@ -1,15 +1,14 @@
-import React from 'react';
-import { ChakraProvider, theme } from '@chakra-ui/react';
-import Nav from './components/Nav'
-import routes from './routes'
-
+import React from "react";
+import { ChakraProvider } from "@chakra-ui/react";
+import Nav from "./components/Nav";
+import routes from "./routes";
+import customTheme from "./components/customThemeTwo";
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={customTheme}>
       <Nav />
       {routes}
-     
     </ChakraProvider>
   );
 }
