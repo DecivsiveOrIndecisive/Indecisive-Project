@@ -55,7 +55,7 @@ const Result = () => {
     );
   } else {
     return (
-      <Flex justify="center" align="center">
+      <Flex justify="center" align="center" height="80vh">
         <Loading />
       </Flex>
     );

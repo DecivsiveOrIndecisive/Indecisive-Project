@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -10,8 +10,10 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import mapStyleLight from "./mapStyleLight";
-// import mapStyleDark from "./mapStyleDark";
 import { Flex } from "@chakra-ui/react";
+import { MapContext } from "../../context/mapContext";
+import {withRouter} from 'react-router-dom'
+
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -21,53 +23,84 @@ const mapContainerStyle = {
 
 const options = {
   styles: mapStyleLight,
+  disableDefaultUI: true,
 };
 
 function Map() {
-  const [center, setCenter] = useState({
-    lat: 40,
-    lng: -111,
-  });
-  useEffect(() => {
-    fetchLocation();
-  }, []);
+  const { center,  restaurants } = useContext(MapContext);  
+  
+  
+  // const [center, setCenter] = useState({
+    //     lat: 0,
+    //     lng: 0
+    // })
+    // const [restaurants, setRestaurants] = useState([])
+    // console.log(restaurants)
+    // useEffect(() => {
+    //     fetchLocation()        
+    // }, [])
 
-  const fetchLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        setCenter({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      },
-      _ => null
-    );
-  };
+    // const fetchLocation = () => {
+    //     navigator.geolocation.getCurrentPosition((position) => {
+    //         setCenter({
+    //             lat: position.coords.latitude,
+    //             lng: position.coords.longitude
+    //         })
+    //     }, _ => null)
+        
+    // }
 
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries,
-  });
+    // const getRestaurants = async () => {
+    //     console.log(center.lat)
+    //     const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}`)
+    //     setRestaurants(res.data)
+    // }
+    
+    
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        libraries,
+    })
 
-  if (loadError) return "Error loading maps!";
-  if (!isLoaded) return "Loading maps!";
 
-  return (
-    <Flex>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={14}
-        center={center}
-        options={options}
-        // onClick={onMapClick}
-        // onLoad={onMapLoad}
-      >
-        {/* <Marker
-                        position={{ lat: center.lat, lng: center.lng }}
-                    /> */}
-      </GoogleMap>
-    </Flex>
-  );
+    if (loadError) return 'Error loading maps!'
+    if (!isLoaded) return 'Loading maps!'
+
+    // console.log(props)
+    
+   const mappedRestaurants = restaurants.map((food, i) => (
+      <Marker
+          key={i}          
+          position={{lat: food.geometry.location.lat, lng: food.geometry.location.lng}}
+      />
+  ))
+
+
+    return(
+        <Flex>
+                <GoogleMap
+                    mapContainerStyle={mapContainerStyle}
+                    zoom={13}
+                    center={center}
+                    options={options}
+                    // onClick={onMapClick}
+                    // onLoad={onMapLoad}
+
+                >
+                  {mappedRestaurants}
+                    {/* {restaurants.map((food, i) => (
+                        <Marker
+                            key={i}
+                            position={{lat: food.geometry.location.lat, lng: food.geometry.location.lng}}
+                        />
+                    ))} */}
+                   
+
+                </GoogleMap>
+                {/* <button onClick={() => getRestaurants()}>test</button> */}
+                
+        </Flex>
+    )
 }
 
-export default Map;
+export default withRouter(Map);

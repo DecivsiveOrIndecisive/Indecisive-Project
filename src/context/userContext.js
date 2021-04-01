@@ -5,6 +5,7 @@ import axios from "axios";
 export const UserContext = createContext();
 export const UserProvider = withRouter(props => {
   const [user, setUser] = useState(null);
+  const [favPlaces, setFavPlaces] = useState([])
   const history = useHistory();
 
   useEffect(() => {
@@ -76,11 +77,21 @@ export const UserProvider = withRouter(props => {
     await axios
       .get("/api/posts/getSaved", { params: { user_id: user.id } })
       .then(res => {
+        setFavPlaces(res.data)
         return res.data;
       })
       .catch(err => console.log(err));
   };
-
+  
+  const getFavPlaces = async () => {
+    await axios
+      .get("/api/posts/getSaved", { params: { user_id: user.id } })
+      .then(res => {
+        setFavPlaces(res.data)
+      })
+      .catch(err => console.log(err));
+  };
+  
   const getBlacklist = async () => {
     await axios
       .get("/api/posts/getBlacklist", { params: { user_id: user.id } })
@@ -102,6 +113,8 @@ export const UserProvider = withRouter(props => {
         blacklistPlace,
         getFavorite,
         getBlacklist,
+        getFavPlaces,
+        favPlaces
       }}
     >
       {props.children}

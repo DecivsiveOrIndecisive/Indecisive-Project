@@ -1,4 +1,4 @@
-import { TabList, TabPanels, Tabs, Tab, TabPanel } from "@chakra-ui/react";
+import { TabList, TabPanels, Tabs, Tab, TabPanel, useColorMode } from "@chakra-ui/react";
 import History from "./History";
 import Blacklist from "./Blacklist";
 import Favorites from "./Favorites";
@@ -97,7 +97,7 @@ const UserInfo = () => {
         <TabPanel>
           <History />
         </TabPanel>
-        <TabPanel>PUT YOUR COOL MAP HERE</TabPanel>
+        <TabPanel>{colorMode === "dark" ? <BigMapDark /> : <BigMapLight />}</TabPanel>
       </TabPanels>
     </Tabs>
   );
