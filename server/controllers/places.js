@@ -47,7 +47,7 @@ module.exports = {
 
     const blacklist = await db.blacklist.where(`bl_user = ${user_id}`);
 
-    console.log(blacklist);
+    // console.log(blacklist);
 
     return res.status(200).send(blacklist);
   },
