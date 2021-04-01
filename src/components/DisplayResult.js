@@ -1,22 +1,8 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Image,
-  Badge,
-  Heading,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Flex, Image, Badge, Heading, Button } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/userContext";
 import axios from "axios";
-import { MapContext } from "../context/mapContext";
-import {
-  ImageProps,
-  keyframes,
-  usePrefersReducedMotion,
-} from "@chakra-ui/react";
 
 const DisplayResult = ({ result, getResult }) => {
   const userContext = useContext(UserContext);
@@ -26,7 +12,7 @@ const DisplayResult = ({ result, getResult }) => {
   // const [result] = places;
   const calculatePrice = () => {
     let arr = [];
-    for (let i = 0; i < result.price_level; i++) {
+    for (let i = 0; i < Math.round(result.price_level); i++) {
       arr.push("$");
     }
     // console.log(arr);
@@ -35,7 +21,6 @@ const DisplayResult = ({ result, getResult }) => {
   const price = calculatePrice();
 
   const savePlace = () => {
-    alert(userContext.user);
     setState({ ...state, isSaved: true });
     userContext.savePlace(result);
   };
@@ -67,7 +52,7 @@ const DisplayResult = ({ result, getResult }) => {
 
   useEffect(() => {
     getPlaces();
-  }, []);
+  }, [getResult]);
 
   return (
     <Flex align="center" justify="center" direction="column">
@@ -121,7 +106,7 @@ const DisplayResult = ({ result, getResult }) => {
           </Box>
         </Box>
         {userContext.user ? (
-          <Flex justify="center" my={4}>
+          <Flex justify="space-evenly" my={4}>
             <Button
               colorScheme="red"
               onClick={() => savePlace()}
@@ -129,6 +114,16 @@ const DisplayResult = ({ result, getResult }) => {
             >
               {!state.isSaved ? "Add to Favorites" : "Added to Favorites!"}
             </Button>
+            {state.isSaved ? (
+              ""
+            ) : (
+              <Button
+                colorScheme="red"
+                onClick={() => userContext.blacklistPlace(result, getResult)}
+              >
+                Don't show again
+              </Button>
+            )}
           </Flex>
         ) : (
           ""

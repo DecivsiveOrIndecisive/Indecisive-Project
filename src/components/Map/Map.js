@@ -27,23 +27,8 @@ const options = {
   disableDefaultUI: true,
 };
 
-function Map(props) {
-  const {
-    fetchLocation,
-    keyword,
-    getRandomKeyword,
-    restaurants,
-    getRestaurants,
-    center,
-    distance,
-    setDistance,
-    token,
-    moreRestaurants,
-    zip,
-    setZip,
-    getCenterZip
-    
-  } = useContext(MapContext);  
+function Map() {
+  const { center,  restaurants } = useContext(MapContext);  
   
   
   // const [center, setCenter] = useState({
@@ -82,7 +67,7 @@ function Map(props) {
     if (loadError) return 'Error loading maps!'
     if (!isLoaded) return 'Loading maps!'
 
-    console.log(props)
+    // console.log(props)
     
    const mappedRestaurants = restaurants.map((food, i) => (
       <Marker

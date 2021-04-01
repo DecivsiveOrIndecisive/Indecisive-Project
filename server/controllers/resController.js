@@ -4,14 +4,14 @@ const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
 
 module.exports = {
   getRestaurants: async (req, res) => {
-    const { lat, lng, distance, keyword } = req.query;
+    const { lat, lng, distance, keyword, maxprice } = req.query;
     let data = { data: [], token: "" };
     await axios
       .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${+lat},${+lng}&radius=${distance}&keyword=${keyword}&opennow&key=${REACT_APP_GOOGLE_MAPS_API_KEY}`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${+lat},${+lng}&radius=${distance}&keyword=${keyword}&minprice=0&maxprice=${maxprice}&opennow&key=${REACT_APP_GOOGLE_MAPS_API_KEY}`
       )
       .then(response => {
-        console.log(response.data.results);
+        // console.log(response.data.results);
         data = {
           data: response.data.results,
           token: response.data.next_page_token,
@@ -34,7 +34,7 @@ module.exports = {
         `https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${token}&key=${REACT_APP_GOOGLE_MAPS_API_KEY}`
       )
       .then(response => {
-        console.log(response);
+        // console.log(response);
         data = response.data.results;
         res.status(200).send(data);
       })
