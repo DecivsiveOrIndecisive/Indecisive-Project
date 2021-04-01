@@ -6,6 +6,8 @@ import { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { UserContext } from "../context/userContext";
 import axios from 'axios'
+import BigMapDark from './Map/BigMapDark'
+import BigMapLight from './Map/BigMapLight'
 
 const UserInfo = () => {
   let history = useHistory();
@@ -79,6 +81,8 @@ const UserInfo = () => {
         }
       }, [userContext.user]);
 
+      const { colorMode } = useColorMode();
+      
   return (
     <Tabs colorScheme="brand">
       <TabList>
