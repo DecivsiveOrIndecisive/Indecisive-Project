@@ -16,6 +16,7 @@ import MapLight from "./Map/MapLight";
 import React, { useEffect, useContext } from "react";
 import { MapContext } from "../context/mapContext";
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/userContext";
 
 const Homepage = () => {
   const {
@@ -29,7 +30,15 @@ const Homepage = () => {
     setDistance,
     token,
     moreRestaurants,
+    zip,
+    setZip,
+    getCenterZip,
+    maxPrice,
+    setMaxPrice,
+    minPrice,
+    setMinPrice
   } = useContext(MapContext);
+  const {favPlaces, user, getFavPlaces} = useContext(UserContext)
   const { colorMode } = useColorMode();
 
   console.log(distance);
@@ -38,10 +47,15 @@ const Homepage = () => {
   console.log(keyword);
   console.log(token);
   console.log(moreRestaurants);
+  console.log(favPlaces);
+  
 
   useEffect(() => {
     fetchLocation();
     getRandomKeyword();
+    if(user !== null){
+      getFavPlaces()
+    }
   }, []);
 
   return (
@@ -67,7 +81,15 @@ const Homepage = () => {
             focusBorderColor="red.400"
             borderRadius="100px"
             m={2}
+            onChange={e => setZip(e.target.value)}
           />
+          <Container centerContent m={3}>
+            {/* <Input variant="flushed" placeholder="enter zip" onChange={e => setZip(e.target.value)}/> */}
+            {console.log(zip)}
+            <Button size="lg" onClick={getCenterZip} colorScheme="red">
+                Get Coor
+              </Button>
+          </Container>
           <Container centerContent>
             <Heading as="h4" size="m">
               Range
@@ -88,8 +110,39 @@ const Homepage = () => {
             <SliderThumb />
           </Slider>
           <Text>search radius: {Math.round(distance / 1609)} miles</Text>
+          
+          {/* <Slider
+            aria-label="slider-ex-1"
+            defaultValue={1}
+            min={1}
+            max={4}
+            step={1}
+            onChange={setMinPrice}
+            colorScheme="red"
+          >
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb />
+          </Slider>
+          <Text>min price level: {minPrice}</Text>
+          <Slider
+            aria-label="slider-ex-1"
+            defaultValue={2}
+            min={1}
+            max={4}
+            step={1}
+            onChange={setMaxPrice}
+            colorScheme="red"
+          >
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb />
+          </Slider>
+          <Text>max price level: {maxPrice}</Text> */}
+          
           {colorMode === "dark" ? <Map /> : <MapLight />}
-
           <Container centerContent m={3}>
             <Link to="/result">
               <Button size="lg" onClick={getRestaurants} colorScheme="red">
@@ -97,6 +150,13 @@ const Homepage = () => {
               </Button>
             </Link>
           </Container>
+          {/* <Container centerContent m={3}>
+            <Input variant="flushed" placeholder="enter zip" onChange={e => setZip(e.target.value)}/>
+            {console.log(zip)}
+            <Button size="lg" onClick={getCenterZip} colorScheme="red">
+                Get Coor
+              </Button>
+          </Container> */}
         </Container>
       </Flex>
     </section>

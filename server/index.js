@@ -34,11 +34,12 @@ massive({
   })
   .catch(err => console.log(err));
 
-//*Restautant Endpoint!!!
-app.get("/api/restaurants", restaurantCtrl.getRestaurants);
-app.get("/api/moreRestaurants", restaurantCtrl.getMoreRestaurants);
+  //Restautant Endpoint!!!///////////
+app.get('/api/restaurants', restaurantCtrl.getRestaurants)
+app.get('/api/moreRestaurants', restaurantCtrl.getMoreRestaurants)
+app.get('/api/centerZip', restaurantCtrl.getCenterZip )
 
-//*Auth Endpoints
+//Auth Endpoints
 app.post("/api/auth/register", userCtrl.register);
 app.post("/api/auth/login", userCtrl.login);
 app.post("/api/auth/logout", userCtrl.logout);
