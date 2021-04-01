@@ -47,7 +47,6 @@ module.exports = {
 
     const blacklist = await db.blacklist.where(`bl_user = ${user_id}`);
 
-    console.log(blacklist);
 
     return res.status(200).send(blacklist);
   },
@@ -56,10 +55,10 @@ module.exports = {
     const db = req.app.get("db");
 
     const { place_key, user_id } = req.body;
+    console.log(`Delete has been activated`, req.body)
 
     await db.favorites.destroy({ place_key: place_key, fav_user: user_id });
 
-    // console.log(req.body);
 
     return res.status(200).send("removed from favorites");
   },

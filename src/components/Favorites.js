@@ -1,76 +1,39 @@
 import {Flex} from '@chakra-ui/react'
-import axios from 'axios'
-import DisplayPlace from "./DisplayPlace"
-import { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router";
-import { UserContext } from "../context/userContext";
+import Place from './Place'
 
-const Favorites = () => {
-    let history = useHistory();
-    const [state, setState] = useState({
-    places: [],
-    });
-
-    const userContext = useContext(UserContext)
-    
-    const getPlaces = async () => {
-        await axios
-          .get("/api/posts/getSaved", {
-            params: { user_id: userContext.user.id },
-          })
-          .then(res => {
-            setState({ ...state, places: res.data });
-    
-            console.log(res.data);
-          });
-    };
-
-    const removeFavorite = async placeKey => {
-        await axios
-          .delete("/api/post/deleteSaved", {
-            data: { place_key: placeKey, user_id: userContext.user.id },
-          })
-          .then(res => {
-            console.log(res);
-            getPlaces();
-          })
-          .catch(err => console.log(err));
-      };
-
-    useEffect(() => {
-        if (userContext.user) {
-          getPlaces();
-        } else {
-          history.push("/");
-        }
-      }, [userContext.user]);
-
-    const mappedPlaces = state.places.map((e, i) => {
+const Favorites = (props) => {
+  
+    const mappedPlaces = props.places.map((e, i) => {
+      console.log(e.place_details)
+      console.log(e.place_details.place_key)
         return (
-          <div key={i}>
-            <DisplayPlace
-              place={e}
-              user={userContext.user}
-              removeFavorite={removeFavorite}
-              typeOf="favorite"
-            />
-          </div>
+          <Place
+            key={i}
+            placeKey={e.place_details.place_id}
+            name={e.place_details.name}
+            alt={e.place_details.name}
+            rating={e.place_details.rating}
+            priceLvl={e.place_details.price_level}
+            vincinity={e.place_details.vicinity}
+            userRating={e.place_details.user_ratings_total}
+            favorite={true}
+            blacklist={false}
+          />
         );
       });
 
       return (
         <Flex
-        justify="space-evenly"
-        align="center"
-        direction="row"
-        wrap="wrap"
-        mt={10}
-      >
-        {/* {mappedPlaces} */}
-        {state.places.length !== 0
-          ? mappedPlaces
-          : "You do not have any saved places yet!"}
-      </Flex>
+          justify="space-evenly"
+          align="left"
+          direction="column"
+          wrap="wrap"
+          mt={10}
+        >
+          {props.places.length !== 0
+            ? mappedPlaces
+            : "You do not have any saved places yet!"}
+        </Flex>
       )
 }
 
