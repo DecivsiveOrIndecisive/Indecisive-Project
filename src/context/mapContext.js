@@ -1,5 +1,4 @@
-import { createContext, useState, useContext } from "react"
-import { useHistory, useLocation, withRouter } from "react-router"
+import { createContext, useState } from "react"
 import axios from 'axios'
 import { UserContext } from "./userContext";
 
