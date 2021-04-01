@@ -17,7 +17,8 @@ export const MapProvider = (props => {
     const [moreRestaurants, setMoreRestaurants] = useState([])
     const [result, setResult] = useState(null)
     const [zip, setZip] = useState('84111')
-    const [price, setPrice] = useState(1)
+    const [maxPrice, setMaxPrice] = useState(2)
+    const [minPrice, setMinPrice] = useState(1)
     
     const {favPlaces} = useContext(UserContext)
 
@@ -46,7 +47,7 @@ export const MapProvider = (props => {
                 favPlaceDetails.push(place.place_details)
             })
         
-        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&maxprice=${price}&keyword=${keyword}`)
+        const res = await axios.get(`/api/restaurants?lat=${center.lat}&lng=${center.lng}&distance=${distance}&minprice=${minPrice}&maxprice=${maxPrice}&keyword=${keyword}`)
         const restaurantResult = (res.data.data)
         // console.log(restaurantResult)
         
@@ -102,8 +103,10 @@ export const MapProvider = (props => {
                 zip,
                 setZip,
                 getCenterZip,
-                price,
-                setPrice
+                maxPrice,
+                setMaxPrice,
+                minPrice,
+                setMinPrice
             }}>
             {props.children}
         </MapContext.Provider>

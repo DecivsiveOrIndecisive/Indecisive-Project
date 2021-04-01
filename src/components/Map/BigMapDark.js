@@ -5,30 +5,29 @@ import {
   Marker,
   // InfoWindow
 } from "@react-google-maps/api";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import mapStyleLight from "./mapStyleLight";
+import mapStyleDark from "./mapStyleDark";
 import { Flex } from "@chakra-ui/react";
 import { MapContext } from "../../context/mapContext";
 import {withRouter} from 'react-router-dom'
+import { UserContext } from "../../context/userContext";
+
 
 
 const libraries = ["places"];
 const mapContainerStyle = {
   width: "100vw",
-  height: "40vh",
+  height: "85vh",
 };
 
 const options = {
-  styles: mapStyleLight,
+  styles: mapStyleDark,
   disableDefaultUI: true,
 };
 
 function Map() {
   const { center,  restaurants } = useContext(MapContext);  
-  
+  const {favPlaces, user, getFavPlaces} = useContext(UserContext)
+
   
   // const [center, setCenter] = useState({
     //     lat: 0,
@@ -68,10 +67,10 @@ function Map() {
 
     // console.log(props)
     
-   const mappedRestaurants = restaurants.map((food, i) => (
+   const mappedRestaurants = favPlaces.map((food, i) => (
       <Marker
           key={i}          
-          position={{lat: food.geometry.location.lat, lng: food.geometry.location.lng}}
+          position={{lat: food.place_details.geometry.location.lat, lng: food.place_details.geometry.location.lng}}
       />
   ))
 

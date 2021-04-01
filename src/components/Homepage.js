@@ -33,8 +33,10 @@ const Homepage = () => {
     zip,
     setZip,
     getCenterZip,
-    price,
-    setPrice
+    maxPrice,
+    setMaxPrice,
+    minPrice,
+    setMinPrice
   } = useContext(MapContext);
   const {favPlaces, user, getFavPlaces} = useContext(UserContext)
   const { colorMode } = useColorMode();
@@ -108,13 +110,14 @@ const Homepage = () => {
             <SliderThumb />
           </Slider>
           <Text>search radius: {Math.round(distance / 1609)} miles</Text>
-          <Slider
+          
+          {/* <Slider
             aria-label="slider-ex-1"
             defaultValue={1}
-            min={0}
+            min={1}
             max={4}
             step={1}
-            onChange={setPrice}
+            onChange={setMinPrice}
             colorScheme="red"
           >
             <SliderTrack>
@@ -122,7 +125,23 @@ const Homepage = () => {
             </SliderTrack>
             <SliderThumb />
           </Slider>
-          <Text>price level: {price}</Text>
+          <Text>min price level: {minPrice}</Text>
+          <Slider
+            aria-label="slider-ex-1"
+            defaultValue={2}
+            min={1}
+            max={4}
+            step={1}
+            onChange={setMaxPrice}
+            colorScheme="red"
+          >
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb />
+          </Slider>
+          <Text>max price level: {maxPrice}</Text> */}
+          
           {colorMode === "dark" ? <Map /> : <MapLight />}
           <Container centerContent m={3}>
             <Link to="/result">

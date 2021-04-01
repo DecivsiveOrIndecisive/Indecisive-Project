@@ -1,9 +1,12 @@
-import { TabList, TabPanels, Tabs, Tab, TabPanel } from "@chakra-ui/react";
+import { TabList, TabPanels, Tabs, Tab, TabPanel, useColorMode } from "@chakra-ui/react";
 import History from "./History";
 import Blacklist from "./Blacklist";
 import Favorites from "./Favorites";
+import BigMapDark from './Map/BigMapDark'
+import BigMapLight from './Map/BigMapLight'
 
 const UserInfo = () => {
+  const { colorMode } = useColorMode();
   return (
     <Tabs colorScheme="brand">
       <TabList>
@@ -22,7 +25,7 @@ const UserInfo = () => {
         <TabPanel>
           <History />
         </TabPanel>
-        <TabPanel>PUT YOUR COOL MAP HERE</TabPanel>
+        <TabPanel>{colorMode === "dark" ? <BigMapDark /> : <BigMapLight />}</TabPanel>
       </TabPanels>
     </Tabs>
   );
