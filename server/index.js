@@ -14,6 +14,8 @@ const app = express();
 
 app.use(express.json());
 
+app.use(express.static(`${__dirname}/../build`))
+
 app.use(
   session({
     secret: SESSION_SECRET,
@@ -33,6 +35,8 @@ massive({
     console.log("db connected");
   })
   .catch(err => console.log(err));
+
+  
 
   //Restautant Endpoint!!!///////////
 app.get('/api/restaurants', restaurantCtrl.getRestaurants)
