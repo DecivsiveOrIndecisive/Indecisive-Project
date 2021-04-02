@@ -87,7 +87,7 @@ const Homepage = () => {
             {/* <Input variant="flushed" placeholder="enter zip" onChange={e => setZip(e.target.value)}/> */}
             {console.log(zip)}
             <Button size="lg" onClick={getCenterZip} colorScheme="red">
-                Get Coor
+                Go To
               </Button>
           </Container>
           <Container centerContent>
@@ -110,7 +110,7 @@ const Homepage = () => {
             <SliderThumb />
           </Slider>
           <Text>search radius: {Math.round(distance / 1609)} miles</Text>
-          
+
           {/* <Slider
             aria-label="slider-ex-1"
             defaultValue={1}
